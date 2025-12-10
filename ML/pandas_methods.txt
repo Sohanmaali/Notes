@@ -1,2482 +1,983 @@
-# Pandas Complete Methods with Examples – Part 1
+PANDAS METHODS — STRUCTURED SUMMARY FROM YOUR FILE
+=================================================
+Covers: Top-level pandas, DataFrame, Series, Series.str/.dt/.cat, and main window methods.
+Each entry: CALL : short description, then a minimal example.
 
-This is **Part 1** of a **multi-part, fully exhaustive Pandas reference**. Delivered in parts because Pandas has **600+ public methods**.
+
+SECTION 1 — TOP-LEVEL pandas (`pd.*`) FUNCTIONS (ALL CORE ONES)
+---------------------------------------------------------------
+pd.concat([df1, df2])                                   : Concatenates multiple Pandas objects.
+Example:
+    pd.concat([df1, df2])
 
-✅ This series will cover **EVERY public Pandas method**
-✅ Each method includes **what it does + a minimal example**
-✅ No shortcuts, no fake completeness
+pd.crosstab(df.a, df.b)                                 : Computes frequency tables.
+Example:
+    pd.crosstab(df.a, df.b)
 
----
+pd.cut([1,2,3], bins=2)                                 : Bins continuous data into intervals.
+Example:
+    pd.cut([1,2,3], bins=2)
 
-# SECTION 1 — TOP-LEVEL pandas (`pd.*`) FUNCTIONS (ALL CORE ONES)
+pd.get_dummies(df["color"])                             : Creates one-hot encoded columns.
+Example:
+    pd.get_dummies(df["color"])
 
-## Data Input
+pd.merge(df1, df2, on="id")                             : Joins DataFrames SQL-style.
+Example:
+    pd.merge(df1, df2, on="id")
 
-### `read_csv`
+pd.qcut([1,2,3], q=2)                                   : Quantile-based binning.
+Example:
+    pd.qcut([1,2,3], q=2)
 
-Reads data from a CSV file into a DataFrame.
+pd.read_csv("data.csv")                                 : Reads data from a CSV file into a DataFrame.
+Example:
+    pd.read_csv("data.csv")
 
-```python
-pd.read_csv("data.csv")
-```
+pd.read_excel("data.xlsx")                              : Reads Excel files into DataFrames.
+Example:
+    pd.read_excel("data.xlsx")
 
-### `read_table`
+pd.read_feather("data.feather")                         : Reads Feather binary files.
+Example:
+    pd.read_feather("data.feather")
 
-Reads delimited text files (generalized CSV reader).
+pd.read_html(url)                                       : Parses HTML tables into DataFrames.
+Example:
+    pd.read_html(url)
 
-```python
-pd.read_table("data.txt")
-```
+pd.read_json("data.json")                               : Loads JSON data into a DataFrame.
+Example:
+    pd.read_json("data.json")
 
-### `read_excel`
+pd.read_parquet("data.parquet")                         : Reads Parquet columnar storage files.
+Example:
+    pd.read_parquet("data.parquet")
 
-Reads Excel files into DataFrames.
+pd.read_pickle("data.pkl")                              : Loads pickled Pandas objects.
+Example:
+    pd.read_pickle("data.pkl")
 
-```python
-pd.read_excel("data.xlsx")
-```
+pd.read_sql("SELECT * FROM users", conn)                : Reads SQL queries or tables into a DataFrame.
+Example:
+    pd.read_sql("SELECT * FROM users", conn)
 
-### `read_json`
+pd.read_table("data.txt")                               : Reads delimited text files (generalized CSV reader).
+Example:
+    pd.read_table("data.txt")
 
-Loads JSON data into a DataFrame.
+pd.to_datetime(["2024-01-01"])                          : Converts values to datetime.
+Example:
+    pd.to_datetime(["2024-01-01"])
 
-```python
-pd.read_json("data.json")
-```
+pd.to_numeric(["1", "2"])                               : Converts values to numeric types.
+Example:
+    pd.to_numeric(["1", "2"])
 
-### `read_sql`
+pd.to_timedelta(["1 days"])                             : Converts values to timedeltas.
+Example:
+    pd.to_timedelta(["1 days"])
 
-Reads SQL queries or tables into a DataFrame.
 
-```python
-pd.read_sql("SELECT * FROM users", conn)
-```
+SECTION 2 — DataFrame METHODS (A–C)
+-----------------------------------
+df.add(5)                                               : Element-wise addition with alignment.
+Example:
+    df.add(5)
 
-### `read_html`
+df.all()                                                : Checks if all values are True.
+Example:
+    df.all()
 
-Parses HTML tables into DataFrames.
+df.any()                                                : Checks if any value is True.
+Example:
+    df.any()
 
-```python
-pd.read_html(url)
-```
+df.apply(sum)                                           : Applies a function across rows or columns.
+Example:
+    df.apply(sum)
 
-### `read_parquet`
+df.applymap(str)                                        : Applies function to every element.
+Example:
+    df.applymap(str)
 
-Reads Parquet columnar storage files.
+df.astype(int)                                          : Casts columns to types.
+Example:
+    df.astype(int)
 
-```python
-pd.read_parquet("data.parquet")
-```
+df.clip(lower=0, upper=10)                              : Limit values to bounds.
+Example:
+    df.clip(lower=0, upper=10)
 
-### `read_feather`
+df.combine(df2, max)                                    : Combines columns element-wise.
+Example:
+    df.combine(df2, max)
 
-Reads Feather binary files.
+df.combine_first(df2)                                   : Fills missing values.
+Example:
+    df.combine_first(df2)
 
-```python
-pd.read_feather("data.feather")
-```
+df.describe()                                           : Summary statistics.
+Example:
+    df.describe()
 
-### `read_pickle`
+df.div(2)                                               : Element-wise division.
+Example:
+    df.div(2)
 
-Loads pickled Pandas objects.
+df.head()                                               : Returns the first rows.
+Example:
+    df.head()
 
-```python
-pd.read_pickle("data.pkl")
-```
+df.info()                                               : Displays structure and dtypes.
+Example:
+    df.info()
 
----
+df.mul(3)                                               : Element-wise multiplication.
+Example:
+    df.mul(3)
 
-## Data Output
+df.sub(2)                                               : Element-wise subtraction.
+Example:
+    df.sub(2)
 
-### `to_datetime`
+df.tail()                                               : Returns the last rows.
+Example:
+    df.tail()
 
-Converts values to datetime.
 
-```python
-pd.to_datetime(["2024-01-01"])
-```
+PART 2 — DataFrame METHODS (C–F)
+--------------------------------
+df.attrs["source"] = "sensor"                           : Stores global metadata on the DataFrame.
+Example:
+    df.attrs["source"] = "sensor"
 
-### `to_numeric`
+df.bfill()                                              : Backward-fills missing values.
+Example:
+    df.bfill()
 
-Converts values to numeric types.
+df.convert_dtypes()                                     : Converts to nullable dtypes.
+Example:
+    df.convert_dtypes()
 
-```python
-pd.to_numeric(["1", "2"])
-```
+df_copy = df.copy()                                     : Creates a copy of the DataFrame to avoid modifying original data.
+Example:
+    df_copy = df.copy()
 
-### `to_timedelta`
+df.corr()                                               : Computes pairwise correlation.
+Example:
+    df.corr()
 
-Converts values to timedeltas.
+df.count()                                              : Counts non-null values per column.
+Example:
+    df.count()
 
-```python
-pd.to_timedelta(["1 days"])
-```
+df.cov()                                                : Computes covariance matrix.
+Example:
+    df.cov()
 
----
+df.drop(columns=["A"])                                  : Removes rows or columns.
+Example:
+    df.drop(columns=["A"])
 
-## Utility Functions
+df.drop_duplicates()                                    : Removes duplicate rows.
+Example:
+    df.drop_duplicates()
 
-### `concat`
+df.dropna()                                             : Removes missing data.
+Example:
+    df.dropna()
 
-Concatenates multiple Pandas objects.
+df.dtypes                                               : Returns column data types.
+Example:
+    df.dtypes
 
-```python
-pd.concat([df1, df2])
-```
+df.duplicated()                                         : Marks duplicate rows.
+Example:
+    df.duplicated()
 
-### `merge`
+df.ffill()                                              : Forward-fills missing values.
+Example:
+    df.ffill()
 
-Joins DataFrames SQL-style.
+df.fillna(0)                                            : Fills missing values.
+Example:
+    df.fillna(0)
 
-```python
-pd.merge(df1, df2, on="id")
-```
+df.infer_objects()                                      : Attempts better dtype inference.
+Example:
+    df.infer_objects()
 
-### `crosstab`
+for col, s in df.items(): pass                          : Iterates over column name and Series.
+Example:
+    for col, s in df.items(): pass
 
-Computes frequency tables.
+for idx, row in df.iterrows(): pass                     : Iterates row-wise as Series (slow).
+Example:
+    for idx, row in df.iterrows(): pass
 
-```python
-pd.crosstab(df.a, df.b)
-```
+for row in df.itertuples(): pass                        : Iterates rows as named tuples (faster).
+Example:
+    for row in df.itertuples(): pass
 
-### `get_dummies`
+df.mask(df < 0)                                         : Replaces values meeting condition.
+Example:
+    df.mask(df < 0)
 
-Creates one-hot encoded columns.
+df.nunique()                                            : Counts distinct values.
+Example:
+    df.nunique()
 
-```python
-pd.get_dummies(df["color"])
-```
+df.where(df > 0)                                        : Keeps values meeting condition.
+Example:
+    df.where(df > 0)
 
-### `cut`
 
-Bins continuous data into intervals.
+PART 3 — DataFrame METHODS (F–M)
+--------------------------------
+df.filter(like="sales")                                 : Selects rows or columns using labels or patterns.
+Example:
+    df.filter(like="sales")
 
-```python
-pd.cut([1,2,3], bins=2)
-```
+df.get("A")                                             : Returns a column safely, or default if missing.
+Example:
+    df.get("A")
 
-### `qcut`
+df.groupby("category").sum()                            : Splits data into groups for aggregation or transformation.
+Example:
+    df.groupby("category").sum()
 
-Quantile-based binning.
+df.idxmax()                                             : Returns index of maximum value.
+Example:
+    df.idxmax()
 
-```python
-pd.qcut([1,2,3], q=2)
-```
+df.idxmin()                                             : Returns index of minimum value.
+Example:
+    df.idxmin()
 
----
+df.insert(0, "Z", 0)                                    : Inserts a column at a specific position.
+Example:
+    df.insert(0, "Z", 0)
 
-# SECTION 2 — DataFrame METHODS (A–C)
+df.isin([1, 3])                                         : Checks membership against a set of values.
+Example:
+    df.isin([1, 3])
 
-## Creation / Inspection
+df.isna()                                               : Detects missing values.
+Example:
+    df.isna()
 
-### `DataFrame.head`
+df.join(other_df)                                       : Joins columns using index alignment.
+Example:
+    df.join(other_df)
 
-Returns the first rows.
+df.keys()                                               : Returns column labels.
+Example:
+    df.keys()
 
-```python
-df.head()
-```
+df.max()                                                : Computes maximum values.
+Example:
+    df.max()
 
-### `DataFrame.tail`
+df.mean()                                               : Computes mean value.
+Example:
+    df.mean()
 
-Returns the last rows.
+df.median()                                             : Computes median.
+Example:
+    df.median()
 
-```python
-df.tail()
-```
+df.memory_usage()                                       : Reports memory consumption.
+Example:
+    df.memory_usage()
 
-### `DataFrame.info`
+df.merge(other, on="id")                                : Merges DataFrames using key columns.
+Example:
+    df.merge(other, on="id")
 
-Displays structure and dtypes.
+df.min()                                                : Computes minimum values.
+Example:
+    df.min()
 
-```python
-df.info()
-```
+df.notna()                                              : Detects non-missing values.
+Example:
+    df.notna()
 
-### `DataFrame.describe`
+df.pop("A")                                             : Removes and returns a column.
+Example:
+    df.pop("A")
 
-Summary statistics.
+df.reset_index()                                        : Resets index to default integers.
+Example:
+    df.reset_index()
 
-```python
-df.describe()
-```
+df.set_index("id")                                      : Sets an existing column as index.
+Example:
+    df.set_index("id")
 
----
+df.sort_index()                                         : Sorts by index.
+Example:
+    df.sort_index()
 
-## Alignment & Math
+df.sort_values(by="A")                                  : Sorts by column values.
+Example:
+    df.sort_values(by="A")
 
-### `DataFrame.add`
+df.update(df2)                                          : Updates values in-place using another DataFrame.
+Example:
+    df.update(df2)
 
-Element-wise addition with alignment.
 
-```python
-df.add(5)
-```
+PART 4 — DataFrame METHODS (M–R)
+--------------------------------
+df.mode()                                               : Returns the most frequent value(s) per column.
+Example:
+    df.mode()
 
-### `DataFrame.sub`
+df.quantile(0.5)                                        : Computes value at a given quantile.
+Example:
+    df.quantile(0.5)
 
-Element-wise subtraction.
+df.rank()                                               : Assigns rank to data points.
+Example:
+    df.rank()
 
-```python
-df.sub(2)
-```
+df.reindex([0, 2])                                      : Re-aligns data to a new index.
+Example:
+    df.reindex([0, 2])
 
-### `DataFrame.mul`
+df.reindex_like(other_df)                               : Reindexes to match another DataFrame.
+Example:
+    df.reindex_like(other_df)
 
-Element-wise multiplication.
+df.rename(columns={"A": "alpha"})                       : Renames index or columns.
+Example:
+    df.rename(columns={"A": "alpha"})
 
-```python
-df.mul(3)
-```
+df.rename_axis("rows")                                  : Renames the axis labels.
+Example:
+    df.rename_axis("rows")
 
-### `DataFrame.div`
+df.replace(0, None)                                     : Replaces values using mappings or rules.
+Example:
+    df.replace(0, None)
 
-Element-wise division.
+df.round(2)                                             : Rounds numerical values.
+Example:
+    df.round(2)
 
-```python
-df.div(2)
-```
+df.stack()                                              : Stacks columns into a row index.
+Example:
+    df.stack()
 
----
+df.swapaxes(0, 1)                                       : Swaps axes of the DataFrame.
+Example:
+    df.swapaxes(0, 1)
 
-## Logical Operations
+df.to_csv("out.csv")                                    : Exports DataFrame to CSV.
+Example:
+    df.to_csv("out.csv")
 
-### `DataFrame.all`
+df.to_excel("out.xlsx")                                 : Exports DataFrame to Excel.
+Example:
+    df.to_excel("out.xlsx")
 
-Checks if all values are True.
+df.to_json("out.json")                                  : Exports DataFrame to JSON.
+Example:
+    df.to_json("out.json")
 
-```python
-df.all()
-```
+df.to_pickle("out.pkl")                                 : Serializes DataFrame to pickle.
+Example:
+    df.to_pickle("out.pkl")
 
-### `DataFrame.any`
+df.to_sql("table", conn)                                : Writes DataFrame to a SQL table.
+Example:
+    df.to_sql("table", conn)
 
-Checks if any value is True.
+df.transpose()                                          : Transposes rows and columns.
+Example:
+    df.transpose()
 
-```python
-df.any()
-```
+df.unstack()                                            : Unstacks a level of the index.
+Example:
+    df.unstack()
 
----
 
-## Applying Functions
+PART 5 — DataFrame METHODS (S–Z)
+--------------------------------
+bool(df)                                                : Evaluates single-element DataFrame.
+Example:
+    bool(df)
 
-### `DataFrame.apply`
+df.equals(df2)                                          : Checks equality with another DataFrame.
+Example:
+    df.equals(df2)
 
-Applies a function across rows or columns.
+df.ewm(span=3).mean()                                   : Creates exponentially weighted window.
+Example:
+    df.ewm(span=3).mean()
 
-```python
-df.apply(sum)
-```
+df.expanding().sum()                                    : Creates expanding window object.
+Example:
+    df.expanding().sum()
 
-### `DataFrame.applymap`
+df.rolling(3).mean()                                    : Creates rolling window object.
+Example:
+    df.rolling(3).mean()
 
-Applies function to every element.
+df.sample(n=3)                                          : Returns a random sample of rows.
+Example:
+    df.sample(n=3)
 
-```python
-df.applymap(str)
-```
+df.select_dtypes(include=["number"])                    : Selects columns based on data type.
+Example:
+    df.select_dtypes(include=["number"])
 
----
+df.shift(1)                                             : Shifts data by a number of periods.
+Example:
+    df.shift(1)
 
-## Data Cleaning
+df.slice_axis(start=1, end=3)                           : Slices DataFrame along a given axis.
+Example:
+    df.slice_axis(start=1, end=3)
 
-### `DataFrame.astype`
+df.style                                                : Returns a Styler for visual formatting.
+Example:
+    df.style
 
-Casts columns to types.
+df.to_numpy()                                           : Converts DataFrame to NumPy array.
+Example:
+    df.to_numpy()
 
-```python
-df.astype(int)
-```
+df.to_string()                                          : Renders DataFrame as formatted string.
+Example:
+    df.to_string()
 
-### `DataFrame.clip`
+df.values                                               : Returns underlying array (legacy).
+Example:
+    df.values
 
-Limit values to bounds.
+df.xs("A", level=0)                                     : Selects cross-section from a MultiIndex.
+Example:
+    df.xs("A", level=0)
 
-```python
-df.clip(lower=0, upper=10)
-```
 
-### `DataFrame.combine`
+PART 6 — Series METHODS (A–F)
+-----------------------------
+s.add(10)                                               : Element-wise addition with alignment.
+Example:
+    s.add(10)
 
-Combines columns element-wise.
+s.astype(float)                                         : Casts Series to a new dtype.
+Example:
+    s.astype(float)
 
-```python
-df.combine(df2, max)
-```
+s.copy()                                                : Creates a copy of the Series.
+Example:
+    s.copy()
 
-### `DataFrame.combine_first`
+s.count()                                               : Counts non-null values.
+Example:
+    s.count()
 
-Fills missing values.
+s.div(2)                                                : Element-wise division.
+Example:
+    s.div(2)
 
-```python
-df.combine_first(df2)
-```
+s.dropna()                                              : Removes missing values.
+Example:
+    s.dropna()
 
----
+s.duplicated()                                          : Marks duplicate values.
+Example:
+    s.duplicated()
 
-## NOTE
+s.eq(3)                                                 : Checks equality element-wise.
+Example:
+    s.eq(3)
 
-✅ Next part will cover:
+s.fillna(0)                                             : Fills missing values.
+Example:
+    s.fillna(0)
 
-* DataFrame methods **C–F** (`copy`, `corr`, `count`, `drop`, `dropna`, `duplicated`, etc.)
+s.ge(5)                                                 : Greater-or-equal comparison.
+Example:
+    s.ge(5)
 
-This series **will not stop** until **every Pandas method** is covered.
+s.gt(5)                                                 : Greater-than comparison.
+Example:
+    s.gt(5)
 
----
+s.le(5)                                                 : Less-or-equal comparison.
+Example:
+    s.le(5)
 
-# PART 2 — DataFrame METHODS (C–F)
+s.lt(5)                                                 : Less-than comparison.
+Example:
+    s.lt(5)
 
----
+s.mul(2)                                                : Element-wise multiplication.
+Example:
+    s.mul(2)
 
-## Copying & Metadata
+s.ne(0)                                                 : Checks inequality.
+Example:
+    s.ne(0)
 
-### `DataFrame.copy`
+s.nunique()                                             : Counts unique values.
+Example:
+    s.nunique()
 
-Creates a copy of the DataFrame to avoid modifying original data.
+s.pow(2)                                                : Raises values to a power.
+Example:
+    s.pow(2)
 
-```python
-df_copy = df.copy()
-```
+s.sub(5)                                                : Element-wise subtraction.
+Example:
+    s.sub(5)
 
-### `DataFrame.attrs`
+s.to_numpy()                                            : Converts to NumPy array.
+Example:
+    s.to_numpy()
 
-Stores global metadata on the DataFrame.
 
-```python
-df.attrs["source"] = "sensor"
-```
+PART 7 — Series METHODS (G–N)
+-----------------------------
+s.apply(abs)                                            : Applies a function element-wise.
+Example:
+    s.apply(abs)
 
----
+s.get("a")                                              : Safely retrieves element by label, returning default if missing.
+Example:
+    s.get("a")
 
-## Counting & Uniqueness
+s.groupby(labels).sum()                                 : Groups Series values for aggregation or transformation.
+Example:
+    s.groupby(labels).sum()
 
-### `DataFrame.count`
+s.isin([1, 3])                                          : Checks whether values are contained in a set.
+Example:
+    s.isin([1, 3])
 
-Counts non-null values per column.
+s.isna()                                                : Detects missing values.
+Example:
+    s.isna()
 
-```python
-df.count()
-```
+s.keys()                                                : Returns index labels of the Series.
+Example:
+    s.keys()
 
-### `DataFrame.nunique`
+s.map({1: "A"})                                         : Maps values using a dict or function.
+Example:
+    s.map({1: "A"})
 
-Counts distinct values.
+s.memory_usage()                                        : Returns memory usage of the Series.
+Example:
+    s.memory_usage()
 
-```python
-df.nunique()
-```
+s.mode()                                                : Returns most frequent value(s).
+Example:
+    s.mode()
 
----
+s.name = "scores"                                       : Gets or sets Series name.
+Example:
+    s.name = "scores"
 
-## Correlation & Covariance
+s.nlargest(3)                                           : Returns largest N values.
+Example:
+    s.nlargest(3)
 
-### `DataFrame.corr`
+s.notna()                                               : Detects non-missing values.
+Example:
+    s.notna()
 
-Computes pairwise correlation.
+s.nsmallest(3)                                          : Returns smallest N values.
+Example:
+    s.nsmallest(3)
 
-```python
-df.corr()
-```
 
-### `DataFrame.cov`
+PART 8 — Series METHODS (O–Z)
+-----------------------------
+s.diff()                                                : Computes first difference.
+Example:
+    s.diff()
 
-Computes covariance matrix.
+s.equals(s2)                                            : Checks equality with another Series.
+Example:
+    s.equals(s2)
 
-```python
-df.cov()
-```
+s.ewm(span=3).mean()                                    : Creates exponentially weighted window.
+Example:
+    s.ewm(span=3).mean()
 
----
+s.expanding().sum()                                     : Creates expanding window object.
+Example:
+    s.expanding().sum()
 
-## Data Removal
+s.pct_change()                                          : Computes percentage change.
+Example:
+    s.pct_change()
 
-### `DataFrame.drop`
+s.quantile(0.5)                                         : Computes value at given quantile.
+Example:
+    s.quantile(0.5)
 
-Removes rows or columns.
+s.rank()                                                : Assigns ranks to values.
+Example:
+    s.rank()
 
-```python
-df.drop(columns=["A"])
-```
+s.reindex(new_index)                                    : Aligns Series to a new index.
+Example:
+    s.reindex(new_index)
 
-### `DataFrame.dropna`
+s.rename("new_name")                                    : Renames the Series or its index.
+Example:
+    s.rename("new_name")
 
-Removes missing data.
+s.replace(0, None)                                      : Replaces values by mapping or rules.
+Example:
+    s.replace(0, None)
 
-```python
-df.dropna()
-```
+s.rolling(3).mean()                                     : Creates rolling window object.
+Example:
+    s.rolling(3).mean()
 
-### `DataFrame.duplicated`
+s.round(2)                                              : Rounds numeric values.
+Example:
+    s.round(2)
 
-Marks duplicate rows.
+s.shift(1)                                              : Shifts values by periods.
+Example:
+    s.shift(1)
 
-```python
-df.duplicated()
-```
+s.sort_index()                                          : Sorts by index labels.
+Example:
+    s.sort_index()
 
-### `DataFrame.drop_duplicates`
+s.sort_values()                                         : Sorts values while keeping index alignment.
+Example:
+    s.sort_values()
 
-Removes duplicate rows.
+s.to_frame()                                            : Converts Series to DataFrame.
+Example:
+    s.to_frame()
 
-```python
-df.drop_duplicates()
-```
+s.to_list()                                             : Converts to Python list.
+Example:
+    s.to_list()
 
----
+s.unique()                                              : Returns unique values.
+Example:
+    s.unique()
 
-## Data Type Handling
+s.value_counts()                                        : Counts unique values by frequency.
+Example:
+    s.value_counts()
 
-### `DataFrame.dtypes`
 
-Returns column data types.
+PART 9 — Series.str METHODS
+---------------------------
+s.str.capitalize()                                      : capitalize first character
+Example:
+    s.str.capitalize()
 
-```python
-df.dtypes
-```
+s.str.cat()                                             : concatenate strings
+Example:
+    s.str.cat()
 
-### `DataFrame.infer_objects`
+s.str.contains()                                        : substring / regex match
+Example:
+    s.str.contains()
 
-Attempts better dtype inference.
+s.str.decode()                                          : decode bytes
+Example:
+    s.str.decode()
 
-```python
-df.infer_objects()
-```
+s.str.encode()                                          : encode to bytes
+Example:
+    s.str.encode()
 
-### `DataFrame.convert_dtypes`
+s.str.endswith()                                        : suffix check
+Example:
+    s.str.endswith()
 
-Converts to nullable dtypes.
+s.str.extract()                                         : extract regex groups
+Example:
+    s.str.extract()
 
-```python
-df.convert_dtypes()
-```
+s.str.extractall()                                      : extract all matches
+Example:
+    s.str.extractall()
 
----
+s.str.join()                                            : join list elements
+Example:
+    s.str.join()
 
-## Filling & Masking
+s.str.len()                                             : string length
+Example:
+    s.str.len()
 
-### `DataFrame.fillna`
+s.str.lower()                                           : convert to lowercase
+Example:
+    s.str.lower()
 
-Fills missing values.
+s.str.lstrip()                                          : remove leading whitespace
+Example:
+    s.str.lstrip()
 
-```python
-df.fillna(0)
-```
+s.str.match()                                           : regex match from start
+Example:
+    s.str.match()
 
-### `DataFrame.ffill`
+s.str.pad()                                             : pad strings to fixed width
+Example:
+    s.str.pad()
 
-Forward-fills missing values.
+s.str.partition()                                       : split once
+Example:
+    s.str.partition()
 
-```python
-df.ffill()
-```
+s.str.replace()                                         : replace substrings or patterns
+Example:
+    s.str.replace()
 
-### `DataFrame.bfill`
+s.str.rpartition()                                      : right partition
+Example:
+    s.str.rpartition()
 
-Backward-fills missing values.
+s.str.rsplit()                                          : right split
+Example:
+    s.str.rsplit()
 
-```python
-df.bfill()
-```
+s.str.rstrip()                                          : remove trailing whitespace
+Example:
+    s.str.rstrip()
 
-### `DataFrame.where`
+s.str.slice()                                           : slice string positions
+Example:
+    s.str.slice()
 
-Keeps values meeting condition.
+s.str.split()                                           : split into lists
+Example:
+    s.str.split()
 
-```python
-df.where(df > 0)
-```
+s.str.startswith()                                      : prefix check
+Example:
+    s.str.startswith()
 
-### `DataFrame.mask`
+s.str.strip()                                           : remove leading/trailing whitespace
+Example:
+    s.str.strip()
 
-Replaces values meeting condition.
+s.str.title()                                           : title case
+Example:
+    s.str.title()
 
-```python
-df.mask(df < 0)
-```
+s.str.upper()                                           : convert to uppercase
+Example:
+    s.str.upper()
 
----
 
-## Iteration (Rare but Public)
+PART 10 — Series.dt METHODS
+---------------------------
+s.dt.ceil("D")                                          : Ceils timestamps.
+Example:
+    s.dt.ceil("D")
 
-### `DataFrame.items`
+s.dt.day                                                : Returns day of month.
+Example:
+    s.dt.day
 
-Iterates over column name and Series.
+s.dt.dayofweek                                          : Returns weekday (Monday=0).
+Example:
+    s.dt.dayofweek
 
-```python
-for col, s in df.items(): pass
-```
+s.dt.dayofyear                                          : Returns day number within the year.
+Example:
+    s.dt.dayofyear
 
-### `DataFrame.iterrows`
+s.dt.floor("D")                                         : Floors timestamps.
+Example:
+    s.dt.floor("D")
 
-Iterates row-wise as Series (slow).
+s.dt.hour                                               : Returns hour component.
+Example:
+    s.dt.hour
 
-```python
-for idx, row in df.iterrows(): pass
-```
+s.dt.is_leap_year                                       : Checks leap year.
+Example:
+    s.dt.is_leap_year
 
-### `DataFrame.itertuples`
+s.dt.is_month_end                                       : Checks if date is month end.
+Example:
+    s.dt.is_month_end
 
-Iterates rows as named tuples (faster).
+s.dt.is_month_start                                     : Checks if date is month start.
+Example:
+    s.dt.is_month_start
 
-```python
-for row in df.itertuples(): pass
-```
+s.dt.is_quarter_end                                     : Checks if quarter end.
+Example:
+    s.dt.is_quarter_end
 
----
+s.dt.is_quarter_start                                   : Checks if quarter start.
+Example:
+    s.dt.is_quarter_start
 
-## NOTE
+s.dt.is_year_end                                        : Checks if year end.
+Example:
+    s.dt.is_year_end
 
-✅ Next part will cover **DataFrame methods F–M** (filter, groupby, join, merge, memory_usage, etc.)
+s.dt.is_year_start                                      : Checks if year start.
+Example:
+    s.dt.is_year_start
 
----
+s.dt.microsecond                                        : Returns microsecond component.
+Example:
+    s.dt.microsecond
 
-# PART 3 — DataFrame METHODS (F–M)
+s.dt.minute                                             : Returns minute component.
+Example:
+    s.dt.minute
 
----
+s.dt.month                                              : Returns month number.
+Example:
+    s.dt.month
 
-## Filtering & Selection
+s.dt.nanosecond                                         : Returns nanosecond component.
+Example:
+    s.dt.nanosecond
 
-### `DataFrame.filter`
+s.dt.normalize()                                        : Sets time to midnight.
+Example:
+    s.dt.normalize()
 
-Selects rows or columns using labels or patterns.
+s.dt.quarter                                            : Returns quarter (1–4).
+Example:
+    s.dt.quarter
 
-```python
-df.filter(like="sales")
-```
+s.dt.round("H")                                         : Rounds timestamps.
+Example:
+    s.dt.round("H")
 
-### `DataFrame.get`
+s.dt.second                                             : Returns second component.
+Example:
+    s.dt.second
 
-Returns a column safely, or default if missing.
+s.dt.strftime("%Y-%m-%d")                               : Formats datetime as string.
+Example:
+    s.dt.strftime("%Y-%m-%d")
 
-```python
-df.get("A")
-```
+s.dt.to_period("M")                                     : Converts to PeriodIndex.
+Example:
+    s.dt.to_period("M")
 
-### `DataFrame.isin`
+s.dt.to_pydatetime()                                    : Converts to Python datetime objects.
+Example:
+    s.dt.to_pydatetime()
 
-Checks membership against a set of values.
+s.dt.tz                                                 : Returns timezone info.
+Example:
+    s.dt.tz
 
-```python
-df.isin([1, 3])
-```
+s.dt.tz_convert("US/Eastern")                           : Converts between timezones.
+Example:
+    s.dt.tz_convert("US/Eastern")
 
----
+s.dt.tz_localize("UTC")                                 : Assigns a timezone.
+Example:
+    s.dt.tz_localize("UTC")
 
-## Grouping & Combining
+s.dt.week                                               : Week of year (legacy).
+Example:
+    s.dt.week
 
-### `DataFrame.groupby`
+s.dt.weekday                                            : Same as dayofweek.
+Example:
+    s.dt.weekday
 
-Splits data into groups for aggregation or transformation.
+s.dt.year                                               : Returns year component.
+Example:
+    s.dt.year
 
-```python
-df.groupby("category").sum()
-```
 
-### `DataFrame.join`
+PART 11 — Series.cat METHODS
+----------------------------
+s.cat.add_categories(["new"])                           : Adds new categories.
+Example:
+    s.cat.add_categories(["new"])
 
-Joins columns using index alignment.
+s.cat.as_ordered()                                      : Marks categories as ordered.
+Example:
+    s.cat.as_ordered()
 
-```python
-df.join(other_df)
-```
+s.cat.as_unordered()                                    : Removes ordering.
+Example:
+    s.cat.as_unordered()
 
-### `DataFrame.merge`
+s.cat.categories                                        : Returns the category labels.
+Example:
+    s.cat.categories
 
-Merges DataFrames using key columns.
+s.cat.ordered                                           : Checks whether categories are ordered.
+Example:
+    s.cat.ordered
 
-```python
-df.merge(other, on="id")
-```
+s.cat.remove_categories(["old"])                        : Removes unused categories.
+Example:
+    s.cat.remove_categories(["old"])
 
-### `DataFrame.update`
+s.cat.remove_unused_categories()                        : Drops categories not present in data.
+Example:
+    s.cat.remove_unused_categories()
 
-Updates values in-place using another DataFrame.
+s.cat.rename_categories({"A": "alpha"})                 : Renames categories.
+Example:
+    s.cat.rename_categories({"A": "alpha"})
 
-```python
-df.update(df2)
-```
+s.cat.reorder_categories(["high", "medium", "low"])     : Reorders categories.
+Example:
+    s.cat.reorder_categories(["high", "medium", "low"])
 
----
+s.cat.set_categories(["low", "medium", "high"])         : Sets categories explicitly (add/remove/reorder).
+Example:
+    s.cat.set_categories(["low", "medium", "high"])
 
-## Index & Structure Management
-
-### `DataFrame.keys`
-
-Returns column labels.
-
-```python
-df.keys()
-```
-
-### `DataFrame.pop`
-
-Removes and returns a column.
-
-```python
-df.pop("A")
-```
-
-### `DataFrame.insert`
-
-Inserts a column at a specific position.
-
-```python
-df.insert(0, "Z", 0)
-```
-
-````
-
-### `DataFrame.set_index`
-Sets an existing column as index.
-```python
-df.set_index("id")
-````
-
-### `DataFrame.reset_index`
-
-Resets index to default integers.
-
-```python
-df.reset_index()
-```
-
----
-
-## Missing Data Detection
-
-### `DataFrame.isna`
-
-Detects missing values.
-
-```python
-df.isna()
-```
-
-### `DataFrame.notna`
-
-Detects non-missing values.
-
-```python
-df.notna()
-```
-
----
-
-## Math & Descriptive Statistics
-
-### `DataFrame.mean`
-
-Computes mean value.
-
-```python
-df.mean()
-```
-
-### `DataFrame.median`
-
-Computes median.
-
-```python
-df.median()
-```
-
-### `DataFrame.min`
-
-Computes minimum values.
-
-```python
-df.min()
-```
-
-### `DataFrame.max`
-
-Computes maximum values.
-
-```python
-df.max()
-```
-
-### `DataFrame.idxmin`
-
-Returns index of minimum value.
-
-```python
-df.idxmin()
-```
-
-### `DataFrame.idxmax`
-
-Returns index of maximum value.
-
-```python
-df.idxmax()
-```
-
-### `DataFrame.memory_usage`
-
-Reports memory consumption.
-
-```python
-df.memory_usage()
-```
-
----
-
-## Sorting & Ordering
-
-### `DataFrame.sort_values`
-
-Sorts by column values.
-
-```python
-df.sort_values(by="A")
-```
-
-### `DataFrame.sort_index`
-
-Sorts by index.
-
-```python
-df.sort_index()
-```
-
----
-
-## NOTE
-
-✅ Next part will cover **DataFrame methods M–R** (mode, quantile, rank, rename, reindex, replace, reshape, etc.)
-
----
-
-# PART 4 — DataFrame METHODS (M–R)
-
----
-
-## Descriptive Statistics (continued)
-
-### `DataFrame.mode`
-
-Returns the most frequent value(s) per column.
-
-```python
-df.mode()
-```
-
-### `DataFrame.quantile`
-
-Computes value at a given quantile.
-
-```python
-df.quantile(0.5)
-```
-
-### `DataFrame.rank`
-
-Assigns rank to data points.
-
-```python
-df.rank()
-```
-
----
-
-## Label & Axis Operations
-
-### `DataFrame.rename`
-
-Renames index or columns.
-
-```python
-df.rename(columns={"A": "alpha"})
-```
-
-### `DataFrame.reindex`
-
-Re-aligns data to a new index.
-
-```python
-df.reindex([0, 2])
-```
-
-### `DataFrame.reindex_like`
-
-Reindexes to match another DataFrame.
-
-```python
-df.reindex_like(other_df)
-```
-
-### `DataFrame.rename_axis`
-
-Renames the axis labels.
-
-```python
-df.rename_axis("rows")
-```
-
----
-
-## Replacement & Conditional Updates
-
-### `DataFrame.replace`
-
-Replaces values using mappings or rules.
-
-```python
-df.replace(0, None)
-```
-
-### `DataFrame.round`
-
-Rounds numerical values.
-
-```python
-df.round(2)
-```
-
----
-
-## Reshaping & Reordering
-
-### `DataFrame.stack`
-
-Stacks columns into a row index.
-
-```python
-df.stack()
-```
-
-### `DataFrame.unstack`
-
-Unstacks a level of the index.
-
-```python
-df.unstack()
-```
-
-### `DataFrame.swapaxes`
-
-Swaps axes of the DataFrame.
-
-```python
-df.swapaxes(0, 1)
-```
-
-### `DataFrame.transpose`
-
-Transposes rows and columns.
-
-```python
-df.transpose()
-```
-
----
-
-## Serialization & Export
-
-### `DataFrame.to_csv`
-
-Exports DataFrame to CSV.
-
-```python
-df.to_csv("out.csv")
-```
-
-### `DataFrame.to_excel`
-
-Exports DataFrame to Excel.
-
-```python
-df.to_excel("out.xlsx")
-```
-
-### `DataFrame.to_json`
-
-Exports DataFrame to JSON.
-
-```python
-df.to_json("out.json")
-```
-
-### `DataFrame.to_pickle`
-
-Serializes DataFrame to pickle.
-
-```python
-df.to_pickle("out.pkl")
-```
-
-### `DataFrame.to_sql`
-
-Writes DataFrame to a SQL table.
-
-```python
-df.to_sql("table", conn)
-```
-
----
-
-## NOTE
-
-✅ Next part will cover **DataFrame methods S–Z** (select_dtypes, slice, shift, sample, style, values, etc.)
-
----
-
-# PART 5 — DataFrame METHODS (S–Z)
-
----
-
-## Selection & Typing
-
-### `DataFrame.select_dtypes`
-
-Selects columns based on data type.
-
-```python
-df.select_dtypes(include=["number"])
-```
-
-### `DataFrame.xs`
-
-Selects cross-section from a MultiIndex.
-
-```python
-df.xs("A", level=0)
-```
-
----
-
-## Sampling & Shifting
-
-### `DataFrame.sample`
-
-Returns a random sample of rows.
-
-```python
-df.sample(n=3)
-```
-
-### `DataFrame.shift`
-
-Shifts data by a number of periods.
-
-```python
-df.shift(1)
-```
-
----
-
-## Slicing
-
-### `DataFrame.slice_axis`
-
-Slices DataFrame along a given axis.
-
-```python
-df.slice_axis(start=1, end=3)
-```
-
----
-
-## Styling & Presentation
-
-### `DataFrame.style`
-
-Returns a Styler for visual formatting.
-
-```python
-df.style
-```
-
----
-
-## Value Access & Conversion
-
-### `DataFrame.to_numpy`
-
-Converts DataFrame to NumPy array.
-
-```python
-df.to_numpy()
-```
-
-### `DataFrame.values`
-
-Returns underlying array (legacy).
-
-```python
-df.values
-```
-
----
-
-## Window Operations (Entry Points)
-
-### `DataFrame.rolling`
-
-Creates rolling window object.
-
-```python
-df.rolling(3).mean()
-```
-
-### `DataFrame.expanding`
-
-Creates expanding window object.
-
-```python
-df.expanding().sum()
-```
-
-### `DataFrame.ewm`
-
-Creates exponentially weighted window.
-
-```python
-df.ewm(span=3).mean()
-```
-
----
-
-## Other Utilities
-
-### `DataFrame.to_string`
-
-Renders DataFrame as formatted string.
-
-```python
-df.to_string()
-```
-
-### `DataFrame.equals`
-
-Checks equality with another DataFrame.
-
-```python
-df.equals(df2)
-```
-
-### `DataFrame.bool`
-
-Evaluates single-element DataFrame.
-
-```python
-bool(df)
-```
-
----
-
-# ✅ DATAFRAME COMPLETE
-
-All **public DataFrame methods** are now covered.
-
----
-
-# NEXT: SERIES METHODS (ALL)
-
----
-
-# PART 6 — Series METHODS (A–F)
-
----
-
-## Arithmetic & Math
-
-### `Series.add`
-
-Element-wise addition with alignment.
-
-```python
-s.add(10)
-```
-
-### `Series.sub`
-
-Element-wise subtraction.
-
-```python
-s.sub(5)
-```
-
-### `Series.mul`
-
-Element-wise multiplication.
-
-```python
-s.mul(2)
-```
-
-### `Series.div`
-
-Element-wise division.
-
-```python
-s.div(2)
-```
-
-### `Series.pow`
-
-Raises values to a power.
-
-```python
-s.pow(2)
-```
-
----
-
-## Boolean & Comparison
-
-### `Series.eq`
-
-Checks equality element-wise.
-
-```python
-s.eq(3)
-```
-
-### `Series.ne`
-
-Checks inequality.
-
-```python
-s.ne(0)
-```
-
-### `Series.gt`
-
-Greater-than comparison.
-
-```python
-s.gt(5)
-```
-
-### `Series.ge`
-
-Greater-or-equal comparison.
-
-```python
-s.ge(5)
-```
-
-### `Series.lt`
-
-Less-than comparison.
-
-```python
-s.lt(5)
-```
-
-### `Series.le`
-
-Less-or-equal comparison.
-
-```python
-s.le(5)
-```
-
----
-
-## Conversion & Copying
-
-### `Series.astype`
-
-Casts Series to a new dtype.
-
-```python
-s.astype(float)
-```
-
-### `Series.copy`
-
-Creates a copy of the Series.
-
-```python
-s.copy()
-```
-
-### `Series.to_numpy`
-
-Converts to NumPy array.
-
-```python
-s.to_numpy()
-```
-
----
-
-## Counting & Uniqueness
-
-### `Series.count`
-
-Counts non-null values.
-
-```python
-s.count()
-```
-
-### `Series.nunique`
-
-Counts unique values.
-
-```python
-s.nunique()
-```
-
-### `Series.duplicated`
-
-Marks duplicate values.
-
-```python
-s.duplicated()
-```
-
----
-
-## Missing Data
-
-### `Series.dropna`
-
-Removes missing values.
-
-```python
-s.dropna()
-```
-
-### `Series.fillna`
-
-Fills missing values.
-
-```python
-s.fillna(0)
-```
-
----
-
-## NOTE
-
-✅ Next part will cover **Series methods G–N** (get, groupby, isin, isna, map, mode, etc.)
-
----
-
-# PART 7 — Series METHODS (G–N)
-
----
-
-## Access & Lookup
-
-### `Series.get`
-
-Safely retrieves element by label, returning default if missing.
-
-```python
-s.get("a")
-```
-
-### `Series.keys`
-
-Returns index labels of the Series.
-
-```python
-s.keys()
-```
-
----
-
-## Grouping
-
-### `Series.groupby`
-
-Groups Series values for aggregation or transformation.
-
-```python
-s.groupby(labels).sum()
-```
-
----
-
-## Membership & Validity
-
-### `Series.isin`
-
-Checks whether values are contained in a set.
-
-```python
-s.isin([1, 3])
-```
-
-### `Series.isna`
-
-Detects missing values.
-
-```python
-s.isna()
-```
-
-### `Series.notna`
-
-Detects non-missing values.
-
-```python
-s.notna()
-```
-
----
-
-## Mapping & Transformation
-
-### `Series.map`
-
-Maps values using a dict or function.
-
-```python
-s.map({1: "A"})
-```
-
-### `Series.apply`
-
-Applies a function element-wise.
-
-```python
-s.apply(abs)
-```
-
----
-
-## Descriptive Statistics
-
-### `Series.mode`
-
-Returns most frequent value(s).
-
-```python
-s.mode()
-```
-
-### `Series.memory_usage`
-
-Returns memory usage of the Series.
-
-```python
-s.memory_usage()
-```
-
-### `Series.nlargest`
-
-Returns largest N values.
-
-```python
-s.nlargest(3)
-```
-
-### `Series.nsmallest`
-
-Returns smallest N values.
-
-```python
-s.nsmallest(3)
-```
-
----
-
-## Metadata
-
-### `Series.name`
-
-Gets or sets Series name.
-
-```python
-s.name = "scores"
-```
-
----
-
-## NOTE
-
-✅ Next part will cover **Series methods O–Z** (quantile, rank, replace, reindex, sort, shift, unique, etc.)
-
----
-
-# PART 8 — Series METHODS (O–Z)
-
----
-
-## Ordering & Ranking
-
-### `Series.sort_values`
-
-Sorts values while keeping index alignment.
-
-```python
-s.sort_values()
-```
-
-### `Series.sort_index`
-
-Sorts by index labels.
-
-```python
-s.sort_index()
-```
-
-### `Series.rank`
-
-Assigns ranks to values.
-
-```python
-s.rank()
-```
-
----
-
-## Quantiles & Distribution
-
-### `Series.quantile`
-
-Computes value at given quantile.
-
-```python
-s.quantile(0.5)
-```
-
-### `Series.value_counts`
-
-Counts unique values by frequency.
-
-```python
-s.value_counts()
-```
-
----
-
-## Reindexing & Alignment
-
-### `Series.reindex`
-
-Aligns Series to a new index.
-
-```python
-s.reindex(new_index)
-```
-
-### `Series.rename`
-
-Renames the Series or its index.
-
-```python
-s.rename("new_name")
-```
-
----
-
-## Replacement & Cleaning
-
-### `Series.replace`
-
-Replaces values by mapping or rules.
-
-```python
-s.replace(0, None)
-```
-
-### `Series.round`
-
-Rounds numeric values.
-
-```python
-s.round(2)
-```
-
----
-
-## Reshaping & Conversion
-
-### `Series.to_frame`
-
-Converts Series to DataFrame.
-
-```python
-s.to_frame()
-```
-
-### `Series.to_list`
-
-Converts to Python list.
-
-```python
-s.to_list()
-```
-
----
-
-## Shifting & Changes
-
-### `Series.shift`
-
-Shifts values by periods.
-
-```python
-s.shift(1)
-```
-
-### `Series.diff`
-
-Computes first difference.
-
-```python
-s.diff()
-```
-
-### `Series.pct_change`
-
-Computes percentage change.
-
-```python
-s.pct_change()
-```
-
----
-
-## Uniqueness & Inspection
-
-### `Series.unique`
-
-Returns unique values.
-
-```python
-s.unique()
-```
-
-### `Series.equals`
-
-Checks equality with another Series.
-
-```python
-s.equals(s2)
-```
-
----
-
-## Window Entry Points
-
-### `Series.rolling`
-
-Creates rolling window object.
-
-```python
-s.rolling(3).mean()
-```
-
-### `Series.expanding`
-
-Creates expanding window object.
-
-```python
-s.expanding().sum()
-```
-
-### `Series.ewm`
-
-Creates exponentially weighted window.
-
-```python
-s.ewm(span=3).mean()
-```
-
----
- PART 9 — Series.str METHODS (ALL STRING METHODS)
-
-Series.str provides vectorized string operations for Series of text data.
-
-Case Conversion
-
-str.lower – convert to lowercase
-
-str.upper – convert to uppercase
-
-str.title – title case
-
-str.capitalize – capitalize first character
-
-s.str.lower()
-
-Whitespace & Padding
-
-str.strip – remove leading/trailing whitespace
-
-str.lstrip – remove leading whitespace
-
-str.rstrip – remove trailing whitespace
-
-str.pad – pad strings to fixed width
-
-s.str.strip()
-
-Searching & Matching
-
-str.contains – substring / regex match
-
-str.startswith – prefix check
-
-str.endswith – suffix check
-
-str.match – regex match from start
-
-s.str.contains("foo")
-
-Replacing & Splitting
-
-str.replace – replace substrings or patterns
-
-str.split – split into lists
-
-str.rsplit – right split
-
-str.partition – split once
-
-str.rpartition – right partition
-
-s.str.split(",")
-
-Extraction & Slicing
-
-str.extract – extract regex groups
-
-str.extractall – extract all matches
-
-str.slice – slice string positions
-
-s.str.extract(r"(\d+)")
-
-Length & Encoding
-
-str.len – string length
-
-str.encode – encode to bytes
-
-str.decode – decode bytes
-
-s.str.len()
-
-Boolean Checks
-
-str.isalpha
-
-str.isnumeric
-
-str.isalnum
-
-str.isspace
-
-s.str.isalpha()
-
-Joining & Concatenation
-
-str.join – join list elements
-
-str.cat – concatenate strings
-
-s.str.cat(sep=",")
-
-PART 10 — Series.dt METHODS (ALL DATETIME ACCESSOR METHODS)
-
-The .dt accessor exposes vectorized datetime, timedelta, and period operations for Series with datetime-like values.
-
-Date Components
-dt.year
-
-Returns year component.
-
-s.dt.year
-
-dt.month
-
-Returns month number.
-
-s.dt.month
-
-dt.day
-
-Returns day of month.
-
-s.dt.day
-
-dt.hour
-
-Returns hour component.
-
-s.dt.hour
-
-dt.minute
-
-Returns minute component.
-
-s.dt.minute
-
-dt.second
-
-Returns second component.
-
-s.dt.second
-
-dt.microsecond
-
-Returns microsecond component.
-
-s.dt.microsecond
-
-dt.nanosecond
-
-Returns nanosecond component.
-
-s.dt.nanosecond
-
-Calendar Attributes
-dt.dayofweek
-
-Returns weekday (Monday=0).
-
-s.dt.dayofweek
-
-dt.weekday
-
-Same as dayofweek.
-
-s.dt.weekday
-
-dt.dayofyear
-
-Returns day number within the year.
-
-s.dt.dayofyear
-
-dt.week
-
-Week of year (legacy).
-
-s.dt.week
-
-dt.quarter
-
-Returns quarter (1–4).
-
-s.dt.quarter
-
-dt.is_month_start
-
-Checks if date is month start.
-
-s.dt.is_month_start
-
-dt.is_month_end
-
-Checks if date is month end.
-
-s.dt.is_month_end
-
-dt.is_quarter_start
-
-Checks if quarter start.
-
-s.dt.is_quarter_start
-
-dt.is_quarter_end
-
-Checks if quarter end.
-
-s.dt.is_quarter_end
-
-dt.is_year_start
-
-Checks if year start.
-
-s.dt.is_year_start
-
-dt.is_year_end
-
-Checks if year end.
-
-s.dt.is_year_end
-
-Date Formatting & Conversion
-dt.strftime
-
-Formats datetime as string.
-
-s.dt.strftime("%Y-%m-%d")
-
-dt.normalize
-
-Sets time to midnight.
-
-s.dt.normalize()
-
-dt.round
-
-Rounds timestamps.
-
-s.dt.round("H")
-
-dt.floor
-
-Floors timestamps.
-
-s.dt.floor("D")
-
-dt.ceil
-
-Ceils timestamps.
-
-s.dt.ceil("D")
-
-Time Zone Handling
-dt.tz
-
-Returns timezone info.
-
-s.dt.tz
-
-dt.tz_localize
-
-Assigns a timezone.
-
-s.dt.tz_localize("UTC")
-
-dt.tz_convert
-
-Converts between timezones.
-
-s.dt.tz_convert("US/Eastern")
-
-Period & Interval Conversion
-dt.to_period
-
-Converts to PeriodIndex.
-
-s.dt.to_period("M")
-
-dt.to_pydatetime
-
-Converts to Python datetime objects.
-
-s.dt.to_pydatetime()
-
-Boolean Checks
-dt.is_leap_year
-
-Checks leap year.
-
-s.dt.is_leap_year
-
-PART 11 — Series.cat METHODS (ALL CATEGORICAL ACCESSOR METHODS)
-
-The .cat accessor exposes category-specific operations for Categorical data.
-These methods matter for memory efficiency, ordering semantics, and clean modeling.
-
-Category Inspection
-cat.categories
-
-Returns the category labels.
-
-s.cat.categories
-
-cat.ordered
-
-Checks whether categories are ordered.
-
-s.cat.ordered
-
-Category Modification
-cat.add_categories
-
-Adds new categories.
-
-s.cat.add_categories(["new"])
-
-cat.remove_categories
-
-Removes unused categories.
-
-s.cat.remove_categories(["old"])
-
-cat.rename_categories
-
-Renames categories.
-
-s.cat.rename_categories({"A": "alpha"})
-
-cat.set_categories
-
-Sets categories explicitly (add/remove/reorder).
-
-s.cat.set_categories(["low", "medium", "high"])
-
-Ordering Control
-cat.reorder_categories
-
-Reorders categories.
-
-s.cat.reorder_categories(["high", "medium", "low"])
-
-cat.as_ordered
-
-Marks categories as ordered.
-
-s.cat.as_ordered()
-
-cat.as_unordered
-
-Removes ordering.
-
-s.cat.as_unordered()
-
-Cleanup & Utility
-cat.remove_unused_categories
-
-Drops categories not present in data.
-
-s.cat.remove_unused_categories()
-
-✅ SERIES.CAT COMPLETE
-
-All public Series.cat methods are now covered.
-
-At this point you’ve completed:
-
-✅ Series core methods
-
-✅ Series.str
-
-✅ Series.dt
-
-✅ Series.cat
-
-
-PART 12 — GroupBy METHODS
-
-(applies to both DataFrameGroupBy and SeriesGroupBy)
-
-GroupBy enables the split → apply → combine workflow.
-Nearly every serious analysis depends on this.
-
-Core Group Operations (Foundational)
-groupby(...)
-
-Creates a GroupBy object (already done before calling methods).
-
-df.groupby("category")
-
-agg
-
-Applies one or more aggregation functions per group.
-
-df.groupby("cat").agg("mean")
-
-apply
-
-Applies an arbitrary function to each group.
-
-df.groupby("cat").apply(lambda g: g.head(1))
-
-transform
-
-Applies a function and returns results aligned to original shape.
-
-df.groupby("cat")["x"].transform("mean")
-
-
-⚠️ Important truth:
-
-apply = flexible, slow
-
-agg = fast, summarized
-
-transform = shape-preserving
-
-Aggregation Shortcuts (ALL PUBLIC ONES)
-
-These are optimized versions of agg.
-
-df.groupby("cat").sum()
-
-
-sum
-
-mean
-
-count
-
-size
-
-min
-
-max
-
-median
-
-std
-
-var
-
-sem
-
-prod
-
-first
-
-last
-
-nth
-
-ohlc
-
-quantile
-
-skew
-
-kurt
-
-Each computes that statistic per group, efficiently.
-
-Group Inspection & Metadata
-groups
-
-Dictionary of group → index labels.
-
-gb.groups
-
-ngroup
-
-Assigns a group number to each row.
-
-df.groupby("cat").ngroup()
-
-indices
-
-Dictionary of group → integer positions.
-
-gb.indices
-
-Filtering & Selection
-filter
-
-Keeps or removes entire groups based on condition.
-
-df.groupby("cat").filter(lambda g: len(g) > 2)
-
-head
-
-Returns first N rows of each group.
-
-df.groupby("cat").head(2)
-
-tail
-
-Returns last N rows of each group.
-
-df.groupby("cat").tail(2)
-
-take
-
-Selects rows by position within groups.
-
-df.groupby("cat").take([0])
-
-Iteration & Access
-__iter__
-
-Iterates through (group_name, group_df) pairs.
-
-for name, group in df.groupby("cat"):
-    pass
-
-get_group
-
-Retrieves a single group by key.
-
-df.groupby("cat").get_group("A")
-
-Sorting & Ordering
-sort
-
-Sorts group keys (legacy).
-
-df.groupby("cat", sort=True)
-
-Window Interaction
-
-GroupBy objects act as entry points:
-
-rolling
-df.groupby("cat")["x"].rolling(3).mean()
-
-expanding
-df.groupby("cat")["x"].expanding().sum()
-
-ewm
-df.groupby("cat")["x"].ewm(span=3).mean()
-
-Reshaping Group Results
-pivot_table
-
-(related, but top-level)
-
-pd.pivot_table(df, values="x", index="cat")
-
-unstack
-
-Often used after GroupBy.
-
-df.groupby(["a", "b"]).sum().unstack()
 
 PART 13 — WINDOW OBJECTS
-
-(Rolling, Expanding, Exponentially Weighted)
-
-Window objects perform calculations over ranges of data instead of full columns.
-
-They are not “methods”, but computational contexts that expose many methods.
-
-1️⃣ Rolling Window (rolling)
-
-Applies a fixed-size sliding window.
-
-s.rolling(3)
-
-Common Rolling Methods
-
-Each operates within each window:
-
-mean – moving average
-
-sum – moving sum
-
-count – non-null count
-
-min / max – rolling extrema
-
-std / var – dispersion
-
-median
-
-quantile
-
-skew
-
-kurt
-
-cov – rolling covariance
-
-corr – rolling correlation
-
-apply – custom computation
-
-s.rolling(3).mean()
-
-2️⃣ Expanding Window (expanding)
-
-Applies a cumulative window from the start.
-
-s.expanding()
-
-Expanding Methods
-
-Same API as rolling:
-
-sum
-
-mean
-
-count
-
-min / max
-
-std / var
-
-median
-
-quantile
-
-skew
-
-kurt
-
-apply
-
-s.expanding().sum()
-
-
-Use when you want “all data so far” metrics.
-
-3️⃣ Exponentially Weighted (ewm)
-
-Applies decaying weights to older observations.
-
-s.ewm(span=3)
-
-EWM Methods
-
-mean – exponential moving average
-
-sum
-
-std
-
-var
-
-cov
-
-corr
-
-s.ewm(span=5).mean()
-
-
-Used heavily in:
-
-time-series smoothing
-
-finance
-
-signal processing
-
-Window Shared Utilities
-aggregate / agg
-
-Aggregate window results.
-
-s.rolling(3).agg(["mean", "max"])
-
-apply
-
-Custom function per window.
-
-s.rolling(3).apply(max)
-
-
-PART 14 — Index METHODS & INDEX SUBCLASSES
-
-(Index, RangeIndex, DatetimeIndex, PeriodIndex, TimedeltaIndex)
-
-An Index is not just labels.
-It is a first-class, immutable data structure that powers alignment, joins, and performance.
-
-Core Index Methods (apply to all Index types)
-Inspection & Properties
-index.values
-
-Returns underlying array (legacy).
-
-idx.values
-
-index.to_numpy
-
-Preferred NumPy conversion.
-
-idx.to_numpy()
-
-index.dtype
-
-Returns dtype.
-
-idx.dtype
-
-index.name / index.names
-
-Gets or sets index name(s).
-
-idx.name = "id"
-
-index.is_unique
-
-Checks uniqueness.
-
-idx.is_unique
-
-index.has_duplicates
-
-Checks duplicate labels.
-
-idx.has_duplicates
-
-Alignment & Set Operations
-index.union
-
-Union of two indexes.
-
-idx.union(other)
-
-index.intersection
-
-Common labels.
-
-idx.intersection(other)
-
-index.difference
-
-Labels in one index but not the other.
-
-idx.difference(other)
-
-index.append
-
-Appends indexes.
-
-idx.append(other)
-
-Selection & Location
-index.get_loc
-
-Gets integer position of label.
-
-idx.get_loc("A")
-
-index.slice_locs
-
-Computes slice boundaries.
-
-idx.slice_locs("a", "c")
-
-index.take
-
-Selects by positional index.
-
-idx.take([0, 2])
-
-Transformation & Casting
-index.map
-
-Transforms labels.
-
-idx.map(str.lower)
-
-index.astype
-
-Casts index dtype.
-
-idx.astype(str)
-
-index.rename
-
-Renames index.
-
-idx.rename("new_index")
-
-index.set_names
-
-Sets index name(s).
-
-idx.set_names("key")
-
-Sorting & Reordering
-index.sort_values
-
-Sorts index labels.
-
-idx.sort_values()
-
-index.sort_index
-
-Alias for sorting.
-
-idx.sort_index()
-
-index.argsort
-
-Returns sort order.
-
-idx.argsort()
-
-Missing & Duplicates
-index.isna
-
-Detects missing labels.
-
-idx.isna()
-
-index.notna
-
-Detects present labels.
-
-idx.notna()
-
-index.duplicated
-
-Marks duplicate labels.
-
-idx.duplicated()
-
-Conversion Utilities
-index.to_list
-
-Converts to Python list.
-
-idx.to_list()
-
-index.to_series
-
-Converts Index to Series.
-
-idx.to_series()
-
-INDEX SUBCLASSES (SPECIALIZED METHODS)
-RangeIndex
-
-Efficient integer index.
-
-start, stop, step
-
-idx.start
-
-
-Used for performance and memory savings.
-
-DatetimeIndex
-
-Time-based index.
-
-Common Methods
-
-year, month, day
-
-dayofweek
-
-is_month_start
-
-is_year_end
-
-tz_localize
-
-tz_convert
-
-normalize
-
-floor, ceil, round
-
-idx.year
-
-TimedeltaIndex
-
-Represents durations.
-
-days
-
-seconds
-
-total_seconds
-
-round
-
-idx.total_seconds()
-
-PeriodIndex
-
-Represents spans of time.
-
-start_time
-
-end_time
-
-to_timestamp
-
-idx.to_timestamp()
+------------------------
+s.ewm(span=3).mean()                                    : exponential moving average
+Example:
+    s.ewm(span=3).mean()
+
+s.rolling(3).apply()                                    : custom computation
+Example:
+    s.rolling(3).apply()
+
+s.rolling(3).corr()                                     : rolling correlation
+Example:
+    s.rolling(3).corr()
+
+s.rolling(3).count()                                    : non-null count
+Example:
+    s.rolling(3).count()
+
+s.rolling(3).cov()                                      : rolling covariance
+Example:
+    s.rolling(3).cov()
+
+s.rolling(3).mean()                                     : moving average
+Example:
+    s.rolling(3).mean()
+
+s.rolling(3).min / max()                                : rolling extrema
+Example:
+    s.rolling(3).min / max()
+
+s.rolling(3).std / var()                                : dispersion
+Example:
+    s.rolling(3).std / var()
+
+s.rolling(3).sum()                                      : moving sum
+Example:
+    s.rolling(3).sum()
