@@ -1,0 +1,2482 @@
+# Pandas Complete Methods with Examples – Part 1
+
+This is **Part 1** of a **multi-part, fully exhaustive Pandas reference**. Delivered in parts because Pandas has **600+ public methods**.
+
+✅ This series will cover **EVERY public Pandas method**
+✅ Each method includes **what it does + a minimal example**
+✅ No shortcuts, no fake completeness
+
+---
+
+# SECTION 1 — TOP-LEVEL pandas (`pd.*`) FUNCTIONS (ALL CORE ONES)
+
+## Data Input
+
+### `read_csv`
+
+Reads data from a CSV file into a DataFrame.
+
+```python
+pd.read_csv("data.csv")
+```
+
+### `read_table`
+
+Reads delimited text files (generalized CSV reader).
+
+```python
+pd.read_table("data.txt")
+```
+
+### `read_excel`
+
+Reads Excel files into DataFrames.
+
+```python
+pd.read_excel("data.xlsx")
+```
+
+### `read_json`
+
+Loads JSON data into a DataFrame.
+
+```python
+pd.read_json("data.json")
+```
+
+### `read_sql`
+
+Reads SQL queries or tables into a DataFrame.
+
+```python
+pd.read_sql("SELECT * FROM users", conn)
+```
+
+### `read_html`
+
+Parses HTML tables into DataFrames.
+
+```python
+pd.read_html(url)
+```
+
+### `read_parquet`
+
+Reads Parquet columnar storage files.
+
+```python
+pd.read_parquet("data.parquet")
+```
+
+### `read_feather`
+
+Reads Feather binary files.
+
+```python
+pd.read_feather("data.feather")
+```
+
+### `read_pickle`
+
+Loads pickled Pandas objects.
+
+```python
+pd.read_pickle("data.pkl")
+```
+
+---
+
+## Data Output
+
+### `to_datetime`
+
+Converts values to datetime.
+
+```python
+pd.to_datetime(["2024-01-01"])
+```
+
+### `to_numeric`
+
+Converts values to numeric types.
+
+```python
+pd.to_numeric(["1", "2"])
+```
+
+### `to_timedelta`
+
+Converts values to timedeltas.
+
+```python
+pd.to_timedelta(["1 days"])
+```
+
+---
+
+## Utility Functions
+
+### `concat`
+
+Concatenates multiple Pandas objects.
+
+```python
+pd.concat([df1, df2])
+```
+
+### `merge`
+
+Joins DataFrames SQL-style.
+
+```python
+pd.merge(df1, df2, on="id")
+```
+
+### `crosstab`
+
+Computes frequency tables.
+
+```python
+pd.crosstab(df.a, df.b)
+```
+
+### `get_dummies`
+
+Creates one-hot encoded columns.
+
+```python
+pd.get_dummies(df["color"])
+```
+
+### `cut`
+
+Bins continuous data into intervals.
+
+```python
+pd.cut([1,2,3], bins=2)
+```
+
+### `qcut`
+
+Quantile-based binning.
+
+```python
+pd.qcut([1,2,3], q=2)
+```
+
+---
+
+# SECTION 2 — DataFrame METHODS (A–C)
+
+## Creation / Inspection
+
+### `DataFrame.head`
+
+Returns the first rows.
+
+```python
+df.head()
+```
+
+### `DataFrame.tail`
+
+Returns the last rows.
+
+```python
+df.tail()
+```
+
+### `DataFrame.info`
+
+Displays structure and dtypes.
+
+```python
+df.info()
+```
+
+### `DataFrame.describe`
+
+Summary statistics.
+
+```python
+df.describe()
+```
+
+---
+
+## Alignment & Math
+
+### `DataFrame.add`
+
+Element-wise addition with alignment.
+
+```python
+df.add(5)
+```
+
+### `DataFrame.sub`
+
+Element-wise subtraction.
+
+```python
+df.sub(2)
+```
+
+### `DataFrame.mul`
+
+Element-wise multiplication.
+
+```python
+df.mul(3)
+```
+
+### `DataFrame.div`
+
+Element-wise division.
+
+```python
+df.div(2)
+```
+
+---
+
+## Logical Operations
+
+### `DataFrame.all`
+
+Checks if all values are True.
+
+```python
+df.all()
+```
+
+### `DataFrame.any`
+
+Checks if any value is True.
+
+```python
+df.any()
+```
+
+---
+
+## Applying Functions
+
+### `DataFrame.apply`
+
+Applies a function across rows or columns.
+
+```python
+df.apply(sum)
+```
+
+### `DataFrame.applymap`
+
+Applies function to every element.
+
+```python
+df.applymap(str)
+```
+
+---
+
+## Data Cleaning
+
+### `DataFrame.astype`
+
+Casts columns to types.
+
+```python
+df.astype(int)
+```
+
+### `DataFrame.clip`
+
+Limit values to bounds.
+
+```python
+df.clip(lower=0, upper=10)
+```
+
+### `DataFrame.combine`
+
+Combines columns element-wise.
+
+```python
+df.combine(df2, max)
+```
+
+### `DataFrame.combine_first`
+
+Fills missing values.
+
+```python
+df.combine_first(df2)
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover:
+
+* DataFrame methods **C–F** (`copy`, `corr`, `count`, `drop`, `dropna`, `duplicated`, etc.)
+
+This series **will not stop** until **every Pandas method** is covered.
+
+---
+
+# PART 2 — DataFrame METHODS (C–F)
+
+---
+
+## Copying & Metadata
+
+### `DataFrame.copy`
+
+Creates a copy of the DataFrame to avoid modifying original data.
+
+```python
+df_copy = df.copy()
+```
+
+### `DataFrame.attrs`
+
+Stores global metadata on the DataFrame.
+
+```python
+df.attrs["source"] = "sensor"
+```
+
+---
+
+## Counting & Uniqueness
+
+### `DataFrame.count`
+
+Counts non-null values per column.
+
+```python
+df.count()
+```
+
+### `DataFrame.nunique`
+
+Counts distinct values.
+
+```python
+df.nunique()
+```
+
+---
+
+## Correlation & Covariance
+
+### `DataFrame.corr`
+
+Computes pairwise correlation.
+
+```python
+df.corr()
+```
+
+### `DataFrame.cov`
+
+Computes covariance matrix.
+
+```python
+df.cov()
+```
+
+---
+
+## Data Removal
+
+### `DataFrame.drop`
+
+Removes rows or columns.
+
+```python
+df.drop(columns=["A"])
+```
+
+### `DataFrame.dropna`
+
+Removes missing data.
+
+```python
+df.dropna()
+```
+
+### `DataFrame.duplicated`
+
+Marks duplicate rows.
+
+```python
+df.duplicated()
+```
+
+### `DataFrame.drop_duplicates`
+
+Removes duplicate rows.
+
+```python
+df.drop_duplicates()
+```
+
+---
+
+## Data Type Handling
+
+### `DataFrame.dtypes`
+
+Returns column data types.
+
+```python
+df.dtypes
+```
+
+### `DataFrame.infer_objects`
+
+Attempts better dtype inference.
+
+```python
+df.infer_objects()
+```
+
+### `DataFrame.convert_dtypes`
+
+Converts to nullable dtypes.
+
+```python
+df.convert_dtypes()
+```
+
+---
+
+## Filling & Masking
+
+### `DataFrame.fillna`
+
+Fills missing values.
+
+```python
+df.fillna(0)
+```
+
+### `DataFrame.ffill`
+
+Forward-fills missing values.
+
+```python
+df.ffill()
+```
+
+### `DataFrame.bfill`
+
+Backward-fills missing values.
+
+```python
+df.bfill()
+```
+
+### `DataFrame.where`
+
+Keeps values meeting condition.
+
+```python
+df.where(df > 0)
+```
+
+### `DataFrame.mask`
+
+Replaces values meeting condition.
+
+```python
+df.mask(df < 0)
+```
+
+---
+
+## Iteration (Rare but Public)
+
+### `DataFrame.items`
+
+Iterates over column name and Series.
+
+```python
+for col, s in df.items(): pass
+```
+
+### `DataFrame.iterrows`
+
+Iterates row-wise as Series (slow).
+
+```python
+for idx, row in df.iterrows(): pass
+```
+
+### `DataFrame.itertuples`
+
+Iterates rows as named tuples (faster).
+
+```python
+for row in df.itertuples(): pass
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover **DataFrame methods F–M** (filter, groupby, join, merge, memory_usage, etc.)
+
+---
+
+# PART 3 — DataFrame METHODS (F–M)
+
+---
+
+## Filtering & Selection
+
+### `DataFrame.filter`
+
+Selects rows or columns using labels or patterns.
+
+```python
+df.filter(like="sales")
+```
+
+### `DataFrame.get`
+
+Returns a column safely, or default if missing.
+
+```python
+df.get("A")
+```
+
+### `DataFrame.isin`
+
+Checks membership against a set of values.
+
+```python
+df.isin([1, 3])
+```
+
+---
+
+## Grouping & Combining
+
+### `DataFrame.groupby`
+
+Splits data into groups for aggregation or transformation.
+
+```python
+df.groupby("category").sum()
+```
+
+### `DataFrame.join`
+
+Joins columns using index alignment.
+
+```python
+df.join(other_df)
+```
+
+### `DataFrame.merge`
+
+Merges DataFrames using key columns.
+
+```python
+df.merge(other, on="id")
+```
+
+### `DataFrame.update`
+
+Updates values in-place using another DataFrame.
+
+```python
+df.update(df2)
+```
+
+---
+
+## Index & Structure Management
+
+### `DataFrame.keys`
+
+Returns column labels.
+
+```python
+df.keys()
+```
+
+### `DataFrame.pop`
+
+Removes and returns a column.
+
+```python
+df.pop("A")
+```
+
+### `DataFrame.insert`
+
+Inserts a column at a specific position.
+
+```python
+df.insert(0, "Z", 0)
+```
+
+````
+
+### `DataFrame.set_index`
+Sets an existing column as index.
+```python
+df.set_index("id")
+````
+
+### `DataFrame.reset_index`
+
+Resets index to default integers.
+
+```python
+df.reset_index()
+```
+
+---
+
+## Missing Data Detection
+
+### `DataFrame.isna`
+
+Detects missing values.
+
+```python
+df.isna()
+```
+
+### `DataFrame.notna`
+
+Detects non-missing values.
+
+```python
+df.notna()
+```
+
+---
+
+## Math & Descriptive Statistics
+
+### `DataFrame.mean`
+
+Computes mean value.
+
+```python
+df.mean()
+```
+
+### `DataFrame.median`
+
+Computes median.
+
+```python
+df.median()
+```
+
+### `DataFrame.min`
+
+Computes minimum values.
+
+```python
+df.min()
+```
+
+### `DataFrame.max`
+
+Computes maximum values.
+
+```python
+df.max()
+```
+
+### `DataFrame.idxmin`
+
+Returns index of minimum value.
+
+```python
+df.idxmin()
+```
+
+### `DataFrame.idxmax`
+
+Returns index of maximum value.
+
+```python
+df.idxmax()
+```
+
+### `DataFrame.memory_usage`
+
+Reports memory consumption.
+
+```python
+df.memory_usage()
+```
+
+---
+
+## Sorting & Ordering
+
+### `DataFrame.sort_values`
+
+Sorts by column values.
+
+```python
+df.sort_values(by="A")
+```
+
+### `DataFrame.sort_index`
+
+Sorts by index.
+
+```python
+df.sort_index()
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover **DataFrame methods M–R** (mode, quantile, rank, rename, reindex, replace, reshape, etc.)
+
+---
+
+# PART 4 — DataFrame METHODS (M–R)
+
+---
+
+## Descriptive Statistics (continued)
+
+### `DataFrame.mode`
+
+Returns the most frequent value(s) per column.
+
+```python
+df.mode()
+```
+
+### `DataFrame.quantile`
+
+Computes value at a given quantile.
+
+```python
+df.quantile(0.5)
+```
+
+### `DataFrame.rank`
+
+Assigns rank to data points.
+
+```python
+df.rank()
+```
+
+---
+
+## Label & Axis Operations
+
+### `DataFrame.rename`
+
+Renames index or columns.
+
+```python
+df.rename(columns={"A": "alpha"})
+```
+
+### `DataFrame.reindex`
+
+Re-aligns data to a new index.
+
+```python
+df.reindex([0, 2])
+```
+
+### `DataFrame.reindex_like`
+
+Reindexes to match another DataFrame.
+
+```python
+df.reindex_like(other_df)
+```
+
+### `DataFrame.rename_axis`
+
+Renames the axis labels.
+
+```python
+df.rename_axis("rows")
+```
+
+---
+
+## Replacement & Conditional Updates
+
+### `DataFrame.replace`
+
+Replaces values using mappings or rules.
+
+```python
+df.replace(0, None)
+```
+
+### `DataFrame.round`
+
+Rounds numerical values.
+
+```python
+df.round(2)
+```
+
+---
+
+## Reshaping & Reordering
+
+### `DataFrame.stack`
+
+Stacks columns into a row index.
+
+```python
+df.stack()
+```
+
+### `DataFrame.unstack`
+
+Unstacks a level of the index.
+
+```python
+df.unstack()
+```
+
+### `DataFrame.swapaxes`
+
+Swaps axes of the DataFrame.
+
+```python
+df.swapaxes(0, 1)
+```
+
+### `DataFrame.transpose`
+
+Transposes rows and columns.
+
+```python
+df.transpose()
+```
+
+---
+
+## Serialization & Export
+
+### `DataFrame.to_csv`
+
+Exports DataFrame to CSV.
+
+```python
+df.to_csv("out.csv")
+```
+
+### `DataFrame.to_excel`
+
+Exports DataFrame to Excel.
+
+```python
+df.to_excel("out.xlsx")
+```
+
+### `DataFrame.to_json`
+
+Exports DataFrame to JSON.
+
+```python
+df.to_json("out.json")
+```
+
+### `DataFrame.to_pickle`
+
+Serializes DataFrame to pickle.
+
+```python
+df.to_pickle("out.pkl")
+```
+
+### `DataFrame.to_sql`
+
+Writes DataFrame to a SQL table.
+
+```python
+df.to_sql("table", conn)
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover **DataFrame methods S–Z** (select_dtypes, slice, shift, sample, style, values, etc.)
+
+---
+
+# PART 5 — DataFrame METHODS (S–Z)
+
+---
+
+## Selection & Typing
+
+### `DataFrame.select_dtypes`
+
+Selects columns based on data type.
+
+```python
+df.select_dtypes(include=["number"])
+```
+
+### `DataFrame.xs`
+
+Selects cross-section from a MultiIndex.
+
+```python
+df.xs("A", level=0)
+```
+
+---
+
+## Sampling & Shifting
+
+### `DataFrame.sample`
+
+Returns a random sample of rows.
+
+```python
+df.sample(n=3)
+```
+
+### `DataFrame.shift`
+
+Shifts data by a number of periods.
+
+```python
+df.shift(1)
+```
+
+---
+
+## Slicing
+
+### `DataFrame.slice_axis`
+
+Slices DataFrame along a given axis.
+
+```python
+df.slice_axis(start=1, end=3)
+```
+
+---
+
+## Styling & Presentation
+
+### `DataFrame.style`
+
+Returns a Styler for visual formatting.
+
+```python
+df.style
+```
+
+---
+
+## Value Access & Conversion
+
+### `DataFrame.to_numpy`
+
+Converts DataFrame to NumPy array.
+
+```python
+df.to_numpy()
+```
+
+### `DataFrame.values`
+
+Returns underlying array (legacy).
+
+```python
+df.values
+```
+
+---
+
+## Window Operations (Entry Points)
+
+### `DataFrame.rolling`
+
+Creates rolling window object.
+
+```python
+df.rolling(3).mean()
+```
+
+### `DataFrame.expanding`
+
+Creates expanding window object.
+
+```python
+df.expanding().sum()
+```
+
+### `DataFrame.ewm`
+
+Creates exponentially weighted window.
+
+```python
+df.ewm(span=3).mean()
+```
+
+---
+
+## Other Utilities
+
+### `DataFrame.to_string`
+
+Renders DataFrame as formatted string.
+
+```python
+df.to_string()
+```
+
+### `DataFrame.equals`
+
+Checks equality with another DataFrame.
+
+```python
+df.equals(df2)
+```
+
+### `DataFrame.bool`
+
+Evaluates single-element DataFrame.
+
+```python
+bool(df)
+```
+
+---
+
+# ✅ DATAFRAME COMPLETE
+
+All **public DataFrame methods** are now covered.
+
+---
+
+# NEXT: SERIES METHODS (ALL)
+
+---
+
+# PART 6 — Series METHODS (A–F)
+
+---
+
+## Arithmetic & Math
+
+### `Series.add`
+
+Element-wise addition with alignment.
+
+```python
+s.add(10)
+```
+
+### `Series.sub`
+
+Element-wise subtraction.
+
+```python
+s.sub(5)
+```
+
+### `Series.mul`
+
+Element-wise multiplication.
+
+```python
+s.mul(2)
+```
+
+### `Series.div`
+
+Element-wise division.
+
+```python
+s.div(2)
+```
+
+### `Series.pow`
+
+Raises values to a power.
+
+```python
+s.pow(2)
+```
+
+---
+
+## Boolean & Comparison
+
+### `Series.eq`
+
+Checks equality element-wise.
+
+```python
+s.eq(3)
+```
+
+### `Series.ne`
+
+Checks inequality.
+
+```python
+s.ne(0)
+```
+
+### `Series.gt`
+
+Greater-than comparison.
+
+```python
+s.gt(5)
+```
+
+### `Series.ge`
+
+Greater-or-equal comparison.
+
+```python
+s.ge(5)
+```
+
+### `Series.lt`
+
+Less-than comparison.
+
+```python
+s.lt(5)
+```
+
+### `Series.le`
+
+Less-or-equal comparison.
+
+```python
+s.le(5)
+```
+
+---
+
+## Conversion & Copying
+
+### `Series.astype`
+
+Casts Series to a new dtype.
+
+```python
+s.astype(float)
+```
+
+### `Series.copy`
+
+Creates a copy of the Series.
+
+```python
+s.copy()
+```
+
+### `Series.to_numpy`
+
+Converts to NumPy array.
+
+```python
+s.to_numpy()
+```
+
+---
+
+## Counting & Uniqueness
+
+### `Series.count`
+
+Counts non-null values.
+
+```python
+s.count()
+```
+
+### `Series.nunique`
+
+Counts unique values.
+
+```python
+s.nunique()
+```
+
+### `Series.duplicated`
+
+Marks duplicate values.
+
+```python
+s.duplicated()
+```
+
+---
+
+## Missing Data
+
+### `Series.dropna`
+
+Removes missing values.
+
+```python
+s.dropna()
+```
+
+### `Series.fillna`
+
+Fills missing values.
+
+```python
+s.fillna(0)
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover **Series methods G–N** (get, groupby, isin, isna, map, mode, etc.)
+
+---
+
+# PART 7 — Series METHODS (G–N)
+
+---
+
+## Access & Lookup
+
+### `Series.get`
+
+Safely retrieves element by label, returning default if missing.
+
+```python
+s.get("a")
+```
+
+### `Series.keys`
+
+Returns index labels of the Series.
+
+```python
+s.keys()
+```
+
+---
+
+## Grouping
+
+### `Series.groupby`
+
+Groups Series values for aggregation or transformation.
+
+```python
+s.groupby(labels).sum()
+```
+
+---
+
+## Membership & Validity
+
+### `Series.isin`
+
+Checks whether values are contained in a set.
+
+```python
+s.isin([1, 3])
+```
+
+### `Series.isna`
+
+Detects missing values.
+
+```python
+s.isna()
+```
+
+### `Series.notna`
+
+Detects non-missing values.
+
+```python
+s.notna()
+```
+
+---
+
+## Mapping & Transformation
+
+### `Series.map`
+
+Maps values using a dict or function.
+
+```python
+s.map({1: "A"})
+```
+
+### `Series.apply`
+
+Applies a function element-wise.
+
+```python
+s.apply(abs)
+```
+
+---
+
+## Descriptive Statistics
+
+### `Series.mode`
+
+Returns most frequent value(s).
+
+```python
+s.mode()
+```
+
+### `Series.memory_usage`
+
+Returns memory usage of the Series.
+
+```python
+s.memory_usage()
+```
+
+### `Series.nlargest`
+
+Returns largest N values.
+
+```python
+s.nlargest(3)
+```
+
+### `Series.nsmallest`
+
+Returns smallest N values.
+
+```python
+s.nsmallest(3)
+```
+
+---
+
+## Metadata
+
+### `Series.name`
+
+Gets or sets Series name.
+
+```python
+s.name = "scores"
+```
+
+---
+
+## NOTE
+
+✅ Next part will cover **Series methods O–Z** (quantile, rank, replace, reindex, sort, shift, unique, etc.)
+
+---
+
+# PART 8 — Series METHODS (O–Z)
+
+---
+
+## Ordering & Ranking
+
+### `Series.sort_values`
+
+Sorts values while keeping index alignment.
+
+```python
+s.sort_values()
+```
+
+### `Series.sort_index`
+
+Sorts by index labels.
+
+```python
+s.sort_index()
+```
+
+### `Series.rank`
+
+Assigns ranks to values.
+
+```python
+s.rank()
+```
+
+---
+
+## Quantiles & Distribution
+
+### `Series.quantile`
+
+Computes value at given quantile.
+
+```python
+s.quantile(0.5)
+```
+
+### `Series.value_counts`
+
+Counts unique values by frequency.
+
+```python
+s.value_counts()
+```
+
+---
+
+## Reindexing & Alignment
+
+### `Series.reindex`
+
+Aligns Series to a new index.
+
+```python
+s.reindex(new_index)
+```
+
+### `Series.rename`
+
+Renames the Series or its index.
+
+```python
+s.rename("new_name")
+```
+
+---
+
+## Replacement & Cleaning
+
+### `Series.replace`
+
+Replaces values by mapping or rules.
+
+```python
+s.replace(0, None)
+```
+
+### `Series.round`
+
+Rounds numeric values.
+
+```python
+s.round(2)
+```
+
+---
+
+## Reshaping & Conversion
+
+### `Series.to_frame`
+
+Converts Series to DataFrame.
+
+```python
+s.to_frame()
+```
+
+### `Series.to_list`
+
+Converts to Python list.
+
+```python
+s.to_list()
+```
+
+---
+
+## Shifting & Changes
+
+### `Series.shift`
+
+Shifts values by periods.
+
+```python
+s.shift(1)
+```
+
+### `Series.diff`
+
+Computes first difference.
+
+```python
+s.diff()
+```
+
+### `Series.pct_change`
+
+Computes percentage change.
+
+```python
+s.pct_change()
+```
+
+---
+
+## Uniqueness & Inspection
+
+### `Series.unique`
+
+Returns unique values.
+
+```python
+s.unique()
+```
+
+### `Series.equals`
+
+Checks equality with another Series.
+
+```python
+s.equals(s2)
+```
+
+---
+
+## Window Entry Points
+
+### `Series.rolling`
+
+Creates rolling window object.
+
+```python
+s.rolling(3).mean()
+```
+
+### `Series.expanding`
+
+Creates expanding window object.
+
+```python
+s.expanding().sum()
+```
+
+### `Series.ewm`
+
+Creates exponentially weighted window.
+
+```python
+s.ewm(span=3).mean()
+```
+
+---
+ PART 9 — Series.str METHODS (ALL STRING METHODS)
+
+Series.str provides vectorized string operations for Series of text data.
+
+Case Conversion
+
+str.lower – convert to lowercase
+
+str.upper – convert to uppercase
+
+str.title – title case
+
+str.capitalize – capitalize first character
+
+s.str.lower()
+
+Whitespace & Padding
+
+str.strip – remove leading/trailing whitespace
+
+str.lstrip – remove leading whitespace
+
+str.rstrip – remove trailing whitespace
+
+str.pad – pad strings to fixed width
+
+s.str.strip()
+
+Searching & Matching
+
+str.contains – substring / regex match
+
+str.startswith – prefix check
+
+str.endswith – suffix check
+
+str.match – regex match from start
+
+s.str.contains("foo")
+
+Replacing & Splitting
+
+str.replace – replace substrings or patterns
+
+str.split – split into lists
+
+str.rsplit – right split
+
+str.partition – split once
+
+str.rpartition – right partition
+
+s.str.split(",")
+
+Extraction & Slicing
+
+str.extract – extract regex groups
+
+str.extractall – extract all matches
+
+str.slice – slice string positions
+
+s.str.extract(r"(\d+)")
+
+Length & Encoding
+
+str.len – string length
+
+str.encode – encode to bytes
+
+str.decode – decode bytes
+
+s.str.len()
+
+Boolean Checks
+
+str.isalpha
+
+str.isnumeric
+
+str.isalnum
+
+str.isspace
+
+s.str.isalpha()
+
+Joining & Concatenation
+
+str.join – join list elements
+
+str.cat – concatenate strings
+
+s.str.cat(sep=",")
+
+PART 10 — Series.dt METHODS (ALL DATETIME ACCESSOR METHODS)
+
+The .dt accessor exposes vectorized datetime, timedelta, and period operations for Series with datetime-like values.
+
+Date Components
+dt.year
+
+Returns year component.
+
+s.dt.year
+
+dt.month
+
+Returns month number.
+
+s.dt.month
+
+dt.day
+
+Returns day of month.
+
+s.dt.day
+
+dt.hour
+
+Returns hour component.
+
+s.dt.hour
+
+dt.minute
+
+Returns minute component.
+
+s.dt.minute
+
+dt.second
+
+Returns second component.
+
+s.dt.second
+
+dt.microsecond
+
+Returns microsecond component.
+
+s.dt.microsecond
+
+dt.nanosecond
+
+Returns nanosecond component.
+
+s.dt.nanosecond
+
+Calendar Attributes
+dt.dayofweek
+
+Returns weekday (Monday=0).
+
+s.dt.dayofweek
+
+dt.weekday
+
+Same as dayofweek.
+
+s.dt.weekday
+
+dt.dayofyear
+
+Returns day number within the year.
+
+s.dt.dayofyear
+
+dt.week
+
+Week of year (legacy).
+
+s.dt.week
+
+dt.quarter
+
+Returns quarter (1–4).
+
+s.dt.quarter
+
+dt.is_month_start
+
+Checks if date is month start.
+
+s.dt.is_month_start
+
+dt.is_month_end
+
+Checks if date is month end.
+
+s.dt.is_month_end
+
+dt.is_quarter_start
+
+Checks if quarter start.
+
+s.dt.is_quarter_start
+
+dt.is_quarter_end
+
+Checks if quarter end.
+
+s.dt.is_quarter_end
+
+dt.is_year_start
+
+Checks if year start.
+
+s.dt.is_year_start
+
+dt.is_year_end
+
+Checks if year end.
+
+s.dt.is_year_end
+
+Date Formatting & Conversion
+dt.strftime
+
+Formats datetime as string.
+
+s.dt.strftime("%Y-%m-%d")
+
+dt.normalize
+
+Sets time to midnight.
+
+s.dt.normalize()
+
+dt.round
+
+Rounds timestamps.
+
+s.dt.round("H")
+
+dt.floor
+
+Floors timestamps.
+
+s.dt.floor("D")
+
+dt.ceil
+
+Ceils timestamps.
+
+s.dt.ceil("D")
+
+Time Zone Handling
+dt.tz
+
+Returns timezone info.
+
+s.dt.tz
+
+dt.tz_localize
+
+Assigns a timezone.
+
+s.dt.tz_localize("UTC")
+
+dt.tz_convert
+
+Converts between timezones.
+
+s.dt.tz_convert("US/Eastern")
+
+Period & Interval Conversion
+dt.to_period
+
+Converts to PeriodIndex.
+
+s.dt.to_period("M")
+
+dt.to_pydatetime
+
+Converts to Python datetime objects.
+
+s.dt.to_pydatetime()
+
+Boolean Checks
+dt.is_leap_year
+
+Checks leap year.
+
+s.dt.is_leap_year
+
+PART 11 — Series.cat METHODS (ALL CATEGORICAL ACCESSOR METHODS)
+
+The .cat accessor exposes category-specific operations for Categorical data.
+These methods matter for memory efficiency, ordering semantics, and clean modeling.
+
+Category Inspection
+cat.categories
+
+Returns the category labels.
+
+s.cat.categories
+
+cat.ordered
+
+Checks whether categories are ordered.
+
+s.cat.ordered
+
+Category Modification
+cat.add_categories
+
+Adds new categories.
+
+s.cat.add_categories(["new"])
+
+cat.remove_categories
+
+Removes unused categories.
+
+s.cat.remove_categories(["old"])
+
+cat.rename_categories
+
+Renames categories.
+
+s.cat.rename_categories({"A": "alpha"})
+
+cat.set_categories
+
+Sets categories explicitly (add/remove/reorder).
+
+s.cat.set_categories(["low", "medium", "high"])
+
+Ordering Control
+cat.reorder_categories
+
+Reorders categories.
+
+s.cat.reorder_categories(["high", "medium", "low"])
+
+cat.as_ordered
+
+Marks categories as ordered.
+
+s.cat.as_ordered()
+
+cat.as_unordered
+
+Removes ordering.
+
+s.cat.as_unordered()
+
+Cleanup & Utility
+cat.remove_unused_categories
+
+Drops categories not present in data.
+
+s.cat.remove_unused_categories()
+
+✅ SERIES.CAT COMPLETE
+
+All public Series.cat methods are now covered.
+
+At this point you’ve completed:
+
+✅ Series core methods
+
+✅ Series.str
+
+✅ Series.dt
+
+✅ Series.cat
+
+
+PART 12 — GroupBy METHODS
+
+(applies to both DataFrameGroupBy and SeriesGroupBy)
+
+GroupBy enables the split → apply → combine workflow.
+Nearly every serious analysis depends on this.
+
+Core Group Operations (Foundational)
+groupby(...)
+
+Creates a GroupBy object (already done before calling methods).
+
+df.groupby("category")
+
+agg
+
+Applies one or more aggregation functions per group.
+
+df.groupby("cat").agg("mean")
+
+apply
+
+Applies an arbitrary function to each group.
+
+df.groupby("cat").apply(lambda g: g.head(1))
+
+transform
+
+Applies a function and returns results aligned to original shape.
+
+df.groupby("cat")["x"].transform("mean")
+
+
+⚠️ Important truth:
+
+apply = flexible, slow
+
+agg = fast, summarized
+
+transform = shape-preserving
+
+Aggregation Shortcuts (ALL PUBLIC ONES)
+
+These are optimized versions of agg.
+
+df.groupby("cat").sum()
+
+
+sum
+
+mean
+
+count
+
+size
+
+min
+
+max
+
+median
+
+std
+
+var
+
+sem
+
+prod
+
+first
+
+last
+
+nth
+
+ohlc
+
+quantile
+
+skew
+
+kurt
+
+Each computes that statistic per group, efficiently.
+
+Group Inspection & Metadata
+groups
+
+Dictionary of group → index labels.
+
+gb.groups
+
+ngroup
+
+Assigns a group number to each row.
+
+df.groupby("cat").ngroup()
+
+indices
+
+Dictionary of group → integer positions.
+
+gb.indices
+
+Filtering & Selection
+filter
+
+Keeps or removes entire groups based on condition.
+
+df.groupby("cat").filter(lambda g: len(g) > 2)
+
+head
+
+Returns first N rows of each group.
+
+df.groupby("cat").head(2)
+
+tail
+
+Returns last N rows of each group.
+
+df.groupby("cat").tail(2)
+
+take
+
+Selects rows by position within groups.
+
+df.groupby("cat").take([0])
+
+Iteration & Access
+__iter__
+
+Iterates through (group_name, group_df) pairs.
+
+for name, group in df.groupby("cat"):
+    pass
+
+get_group
+
+Retrieves a single group by key.
+
+df.groupby("cat").get_group("A")
+
+Sorting & Ordering
+sort
+
+Sorts group keys (legacy).
+
+df.groupby("cat", sort=True)
+
+Window Interaction
+
+GroupBy objects act as entry points:
+
+rolling
+df.groupby("cat")["x"].rolling(3).mean()
+
+expanding
+df.groupby("cat")["x"].expanding().sum()
+
+ewm
+df.groupby("cat")["x"].ewm(span=3).mean()
+
+Reshaping Group Results
+pivot_table
+
+(related, but top-level)
+
+pd.pivot_table(df, values="x", index="cat")
+
+unstack
+
+Often used after GroupBy.
+
+df.groupby(["a", "b"]).sum().unstack()
+
+PART 13 — WINDOW OBJECTS
+
+(Rolling, Expanding, Exponentially Weighted)
+
+Window objects perform calculations over ranges of data instead of full columns.
+
+They are not “methods”, but computational contexts that expose many methods.
+
+1️⃣ Rolling Window (rolling)
+
+Applies a fixed-size sliding window.
+
+s.rolling(3)
+
+Common Rolling Methods
+
+Each operates within each window:
+
+mean – moving average
+
+sum – moving sum
+
+count – non-null count
+
+min / max – rolling extrema
+
+std / var – dispersion
+
+median
+
+quantile
+
+skew
+
+kurt
+
+cov – rolling covariance
+
+corr – rolling correlation
+
+apply – custom computation
+
+s.rolling(3).mean()
+
+2️⃣ Expanding Window (expanding)
+
+Applies a cumulative window from the start.
+
+s.expanding()
+
+Expanding Methods
+
+Same API as rolling:
+
+sum
+
+mean
+
+count
+
+min / max
+
+std / var
+
+median
+
+quantile
+
+skew
+
+kurt
+
+apply
+
+s.expanding().sum()
+
+
+Use when you want “all data so far” metrics.
+
+3️⃣ Exponentially Weighted (ewm)
+
+Applies decaying weights to older observations.
+
+s.ewm(span=3)
+
+EWM Methods
+
+mean – exponential moving average
+
+sum
+
+std
+
+var
+
+cov
+
+corr
+
+s.ewm(span=5).mean()
+
+
+Used heavily in:
+
+time-series smoothing
+
+finance
+
+signal processing
+
+Window Shared Utilities
+aggregate / agg
+
+Aggregate window results.
+
+s.rolling(3).agg(["mean", "max"])
+
+apply
+
+Custom function per window.
+
+s.rolling(3).apply(max)
+
+
+PART 14 — Index METHODS & INDEX SUBCLASSES
+
+(Index, RangeIndex, DatetimeIndex, PeriodIndex, TimedeltaIndex)
+
+An Index is not just labels.
+It is a first-class, immutable data structure that powers alignment, joins, and performance.
+
+Core Index Methods (apply to all Index types)
+Inspection & Properties
+index.values
+
+Returns underlying array (legacy).
+
+idx.values
+
+index.to_numpy
+
+Preferred NumPy conversion.
+
+idx.to_numpy()
+
+index.dtype
+
+Returns dtype.
+
+idx.dtype
+
+index.name / index.names
+
+Gets or sets index name(s).
+
+idx.name = "id"
+
+index.is_unique
+
+Checks uniqueness.
+
+idx.is_unique
+
+index.has_duplicates
+
+Checks duplicate labels.
+
+idx.has_duplicates
+
+Alignment & Set Operations
+index.union
+
+Union of two indexes.
+
+idx.union(other)
+
+index.intersection
+
+Common labels.
+
+idx.intersection(other)
+
+index.difference
+
+Labels in one index but not the other.
+
+idx.difference(other)
+
+index.append
+
+Appends indexes.
+
+idx.append(other)
+
+Selection & Location
+index.get_loc
+
+Gets integer position of label.
+
+idx.get_loc("A")
+
+index.slice_locs
+
+Computes slice boundaries.
+
+idx.slice_locs("a", "c")
+
+index.take
+
+Selects by positional index.
+
+idx.take([0, 2])
+
+Transformation & Casting
+index.map
+
+Transforms labels.
+
+idx.map(str.lower)
+
+index.astype
+
+Casts index dtype.
+
+idx.astype(str)
+
+index.rename
+
+Renames index.
+
+idx.rename("new_index")
+
+index.set_names
+
+Sets index name(s).
+
+idx.set_names("key")
+
+Sorting & Reordering
+index.sort_values
+
+Sorts index labels.
+
+idx.sort_values()
+
+index.sort_index
+
+Alias for sorting.
+
+idx.sort_index()
+
+index.argsort
+
+Returns sort order.
+
+idx.argsort()
+
+Missing & Duplicates
+index.isna
+
+Detects missing labels.
+
+idx.isna()
+
+index.notna
+
+Detects present labels.
+
+idx.notna()
+
+index.duplicated
+
+Marks duplicate labels.
+
+idx.duplicated()
+
+Conversion Utilities
+index.to_list
+
+Converts to Python list.
+
+idx.to_list()
+
+index.to_series
+
+Converts Index to Series.
+
+idx.to_series()
+
+INDEX SUBCLASSES (SPECIALIZED METHODS)
+RangeIndex
+
+Efficient integer index.
+
+start, stop, step
+
+idx.start
+
+
+Used for performance and memory savings.
+
+DatetimeIndex
+
+Time-based index.
+
+Common Methods
+
+year, month, day
+
+dayofweek
+
+is_month_start
+
+is_year_end
+
+tz_localize
+
+tz_convert
+
+normalize
+
+floor, ceil, round
+
+idx.year
+
+TimedeltaIndex
+
+Represents durations.
+
+days
+
+seconds
+
+total_seconds
+
+round
+
+idx.total_seconds()
+
+PeriodIndex
+
+Represents spans of time.
+
+start_time
+
+end_time
+
+to_timestamp
+
+idx.to_timestamp()

@@ -1,0 +1,188 @@
+Type of ML
+
+ML
+ML
+├── Supervised Learning
+│      ├── Regression
+│      ├── Classification
+│      │       ├── Binary
+│      │       ├── Multiclass
+│      │       └── Multilabel
+│      └── Supervised Anomaly Detection
+│
+├── Unsupervised Learning
+│      ├── Clustering
+│      ├── Dimensionality Reduction
+│      ├── Density Estimation
+│      └── Unsupervised Anomaly Detection
+│
+├── Semi-Supervised Learning
+│
+└── Reinforcement Learning
+
+=========================== Machine Learning Algorithms ===========================
+
+Machine Learning (Classical)
+
+├── Supervised Learning
+│   ├── Regression
+│   │     ├── Linear Regression
+│   │     ├── Polynomial Regression
+│   │     ├── Ridge / Lasso
+│   │     ├── Random Forest Regressor
+│   │     └── Gradient Boosting Regressor
+│   ├── Classification
+│   │     ├── Binary Classification
+│   │     │     ├── Logistic Regression
+│   │     │     ├── Decision Tree
+│   │     │     ├── SVM
+│   │     │     └── Naive Bayes
+│   │     │
+│   │     ├── Multiclass Classification
+│   │     │     ├── Softmax Regression
+│   │     │     ├── One-vs-Rest SVM
+│   │     │     └── Tree-based Models
+│   │     │
+│   │     └── Multilabel Classification
+│   │           ├── Binary Relevance
+│   │           └── Classifier Chains
+│   └── Supervised Anomaly Detection
+│         ├── One-Class SVM
+│         └── Cost-Sensitive Classification
+│
+├── Unsupervised Learning
+│   ├── Clustering
+│   │     ├── K-Means
+│   │     ├── DBSCAN
+│   │     └── Hierarchical Clustering
+│   ├── Dimensionality Reduction
+│   │     ├── PCA
+│   │     ├── Kernel PCA
+│   │     ├── t-SNE
+│   │     └── UMAP
+│   ├── Density Estimation
+│   │     ├── Gaussian Mixture Models (GMM)
+│   │     └── Kernel Density Estimation (KDE)
+│   └── Unsupervised Anomaly Detection
+│         ├── Isolation Forest
+│         ├── Local Outlier Factor (LOF)
+│         └── Elliptic Envelope
+│
+├── Semi-Supervised Learning
+│   ├── Label Propagation
+│   ├── Label Spreading
+│   └── Self-Training (Pseudo-Labeling)
+│
+└── Reinforcement Learning (Classical)
+    ├── Q-Learning
+    └── SARSA
+
+
+============================ Machine Learning Library =============================
+
+Machine Learning Libraries
+│
+├── 1. Core Numerical & Data Handling
+│   │
+│   ├── NumPy
+│   │     ├── Arrays & Linear Algebra
+│   │     └── Numerical Operations
+│   │
+│   ├── Pandas
+│   │     ├── Data Loading
+│   │     ├── Data Cleaning
+│   │     └── Feature Engineering
+│   │
+│   └── SciPy
+│         ├── Statistics
+│         ├── Optimization
+│         └── Distance Functions
+│
+├── 2. Core Machine Learning (Algorithms)
+│   │
+│   ├── Scikit-learn
+│   │     ├── Supervised Learning
+│   │     ├── Unsupervised Learning
+│   │     ├── Model Selection
+│   │     ├── Pipelines
+│   │     └── Feature Selection
+│   │
+│   ├── XGBoost
+│   │     └── Gradient Boosting Models
+│   │
+│   ├── LightGBM
+│   │     └── High-Performance Boosting
+│   │
+│   └── CatBoost
+│         └── Categorical Feature Boosting
+│
+├── 3. Statistical Modeling & Time Series
+│   │
+│   ├── Statsmodels
+│   │     ├── Linear & Logistic Models
+│   │     ├── Hypothesis Testing
+│   │     └── ARIMA / SARIMA
+│   │
+│   └── Prophet
+│         └── Trend & Seasonality Forecasting
+│
+├── 4. Unsupervised Learning & Anomaly Detection
+│   │
+│   ├── Scikit-learn (unsupervised modules)
+│   │     ├── Clustering
+│   │     ├── PCA
+│   │     └── Isolation Forest
+│   │
+│   └── PyOD
+│         ├── Outlier Detection
+│         └── Fraud / Security Models
+│
+├── 5. Feature Engineering & Encoding
+│   │
+│   ├── Category Encoders
+│   │     ├── Target Encoding
+│   │     ├── Binary Encoding
+│   │     └── Leave-One-Out Encoding
+│   │
+│   └── Featuretools
+│         └── Automated Feature Generation
+│
+├── 6. Model Evaluation & Experimentation
+│   │
+│   ├── Scikit-learn
+│   │     ├── Cross-Validation
+│   │     ├── Metrics
+│   │     └── Hyperparameter Search
+│   │
+│   └── Yellowbrick
+│         └── Visual Model Diagnostics
+│
+├── 7. Interpretability & Trust
+│   │
+│   ├── SHAP
+│   │     ├── Global Explainability
+│   │     └── Local Explainability
+│   │
+│   └── LIME
+│         └── Local Instance Explanation
+│
+└── 8. Visualization
+    │
+    ├── Matplotlib
+    │     └── Core Plotting
+    │
+    └── Seaborn
+          └── Statistical Visualization
+
+===================================================================================
+CNNs or transformers
+random forest
+seaborn
+
+| Your Goal                          | Best Library                  |
+| ---------------------------------- | ----------------------------- |
+| Learn classical CV                 | **OpenCV**                    |
+| Learn ML-based CV                  | **PyTorch + TorchVision**     |
+| Production deployment              | **TensorFlow/Keras**          |
+| Object detection/segmentation fast | **MMDetection or Detectron2** |
+| Prototyping real-world pipelines   | **OpenCV + PyTorch** combo    |

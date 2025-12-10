@@ -1,0 +1,135 @@
+--------------------------------------------------
+
+PHASE 1 — Core sklearn workflow ✅ MOST IMPORTANT 
+-----------------------------------------------
+Learn this pattern:
+
+Load data
+→ train_test_split
+→ preprocess
+→ model
+→ fit
+→ predict
+→ evaluate
+→ transform
+
+Key topics:
+- train_test_split
+- fit(), predict()
+- accuracy_score, mean_squared_error
+- Classification vs Regression
+
+Practice:
+- Iris classification
+- California housing regression
+
+--------------------------------------------------
+
+PHASE 2 — CLASSIFICATION FUNDAMENTALS 
+-----------------------------------------------
+Models:
+- LogisticRegression
+- KNeighborsClassifier
+- DecisionTreeClassifier
+- RandomForestClassifier
+
+Concepts:
+- Precision, recall, accuracy
+- Confusion matrix
+- Class imbalance
+
+Project:
+- Binary classification (Titanic / churn / loan)
+- Use:
+  - StandardScaler
+  - Pipeline
+  - classification_report
+
+--------------------------------------------------
+
+PHASE 3 — REGRESSION FUNDAMENTALS 
+---------------------------------------------
+Models:
+- LinearRegression
+- Ridge, Lasso
+- RandomForestRegressor
+
+Metrics:
+- MSE
+- MAE
+- R²
+
+Project:
+- House prices / sales / exam scores
+- Compare:
+  - Scaled vs unscaled data
+  - Linear vs tree models
+
+--------------------------------------------------
+
+PHASE 4 — DATA PREPROCESSING 
+--------------------------------------
+Learn:
+- StandardScaler
+munba mazari
+- OneHotEncoder
+- ColumnTransformer
+- Pipeline
+- Handling missing values
+
+Project:
+- Messy CSV dataset
+- Numeric + categorical columns
+- All preprocessing inside Pipeline
+- No data leakage
+
+--------------------------------------------------
+
+PHASE 5 — MODEL EVALUATION & VALIDATION 
+---------------------------------------------------
+Learn:
+- cross_val_score
+- GridSearchCV
+- Bias vs variance
+- Overfitting vs underfitting
+
+Task:
+- Improve an old project
+- Add cross-validation
+- Tune hyperparameters
+- Explain performance changes
+
+--------------------------------------------------
+
+PHASE 6 — MEDIUM-LEVEL MODELS
+-----------------------------------------
+Learn:
+- SVC / SVR
+- Gradient Boosting
+- (Optional later) XGBoost
+
+Focus:
+- When to use which model
+- Speed vs accuracy vs interpretability
+
+--------------------------------------------------
+
+PHASE 7 — PORTFOLIO PROJECT
+---------------------------------------
+Final project must include:
+- Real dataset
+- EDA
+- Preprocessing
+- Multiple models
+- Proper validation
+- Clean notebook
+- Clear explanations
+
+--------------------------------------------------
+
+LEARNING RULES
+--------------
+- Code first, theory second
+- Break things and fix them
+- Never skip evaluation
+- Never train on test data
